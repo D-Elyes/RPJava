@@ -5,13 +5,15 @@
  */
 package rpjava.client;
 
+import rpjava.common.User;
+
 /**
  *
  * @author Elwès
  */
 public interface LoginIF {
     
-    public void receiveUserData(Object o);
+    public void receiveUserData(User u);
     public void InvalidLogin();
     public void connectionException(Exception e);
 }

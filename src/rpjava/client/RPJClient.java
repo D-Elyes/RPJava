@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package rpjava.client;
+
 import ocsf.client.AbstractClient;
+import rpjava.common.*;
+
 /**
  *
  * @author Florent BERLAND
@@ -19,20 +22,22 @@ public class RPJClient extends AbstractClient {
         return client;
     }
     
-    LoginIF clientUI;
+    LoginIF loginUI;
     
-    private RPJClient(String host, int port, LoginIF clientUI) {
+    private RPJClient(String host, int port, LoginIF loginUI) {
         super(host, port);
-        this.clientUI = clientUI;
+        this.loginUI = loginUI;
     }
     
     @Override
     protected void handleMessageFromServer(Object msg) {
-        
+        if(msg instanceof User){
+            loginUI.receiveUserData((User)msg);
+        }
     }
     
     @Override
     protected void connectionException(Exception e) {
-        clientUI.connectionException(e);
+        loginUI.connectionException(e);
     }
 }

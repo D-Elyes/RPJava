@@ -8,6 +8,7 @@ package rpjava.client;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import rpjava.common.*;
 
 /**
  *
@@ -20,6 +21,7 @@ public class LoginPanel extends javax.swing.JPanel implements LoginIF {
      */
     public LoginPanel() {
         initComponents();
+        LBL_ERROR.setVisible(false);
         try {
             RPJClient.getClient("localhost", 12345, this).openConnection();
         } catch (IOException ex) {
@@ -41,6 +43,7 @@ public class LoginPanel extends javax.swing.JPanel implements LoginIF {
         TXT_NAME = new javax.swing.JTextField();
         BT_LOGIN = new javax.swing.JButton();
         TXT_PASSWORD = new javax.swing.JPasswordField();
+        LBL_ERROR = new javax.swing.JLabel();
 
         jLabel1.setText("User name :");
 
@@ -55,30 +58,41 @@ public class LoginPanel extends javax.swing.JPanel implements LoginIF {
             }
         });
 
+        LBL_ERROR.setForeground(new java.awt.Color(255, 0, 0));
+        LBL_ERROR.setText("An error occured while trying to connect to server");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BT_LOGIN, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BT_LOGIN, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(13, 13, 13)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TXT_PASSWORD, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(TXT_NAME)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(13, 13, 13)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TXT_PASSWORD, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                                    .addComponent(TXT_NAME)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(LBL_ERROR)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
+                .addGap(72, 72, 72)
+                .addComponent(LBL_ERROR)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TXT_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -88,17 +102,22 @@ public class LoginPanel extends javax.swing.JPanel implements LoginIF {
                     .addComponent(TXT_PASSWORD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BT_LOGIN)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void BT_LOGINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_LOGINActionPerformed
-        // TODO add your handling code here:
+        try {
+            RPJClient.getClient(null, 0, null).sendToServer(new Account(TXT_NAME.getText(), String.valueOf(TXT_PASSWORD.getPassword())));
+        } catch (IOException ex) {
+            connectionException(ex);
+        }
     }//GEN-LAST:event_BT_LOGINActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BT_LOGIN;
+    private javax.swing.JLabel LBL_ERROR;
     private javax.swing.JTextField TXT_NAME;
     private javax.swing.JPasswordField TXT_PASSWORD;
     private javax.swing.JLabel jLabel1;
@@ -106,17 +125,18 @@ public class LoginPanel extends javax.swing.JPanel implements LoginIF {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void receiveUserData(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void receiveUserData(User u) {
+        // Go to main menu
     }
 
     @Override
     public void InvalidLogin() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TXT_NAME.setText("");
+        TXT_PASSWORD.setText("");
     }
 
     @Override
     public void connectionException(Exception e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        LBL_ERROR.setVisible(true);
     }
 }
