@@ -5,6 +5,7 @@
  */
 package rpjava.client;
 
+import rpjava.common.exception.*;
 import ocsf.client.AbstractClient;
 import rpjava.common.*;
 
@@ -33,6 +34,8 @@ public class RPJClient extends AbstractClient {
     protected void handleMessageFromServer(Object msg) {
         if(msg instanceof User){
             loginUI.receiveUserData((User)msg);
+        } else if (msg instanceof InvalidAccountException){
+            loginUI.InvalidLogin((InvalidAccountException)msg);
         }
     }
     

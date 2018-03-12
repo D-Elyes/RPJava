@@ -5,6 +5,7 @@
  */
 package rpjava.client;
 
+import rpjava.common.exception.InvalidAccountException;
 import rpjava.common.User;
 
 /**
@@ -14,6 +15,6 @@ import rpjava.common.User;
 public interface LoginIF {
     
     public void receiveUserData(User u);
-    public void InvalidLogin();
+    public void InvalidLogin(InvalidAccountException e);
     public void connectionException(Exception e);
 }

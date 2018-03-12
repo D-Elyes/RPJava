@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import rpjava.common.*;
+import rpjava.common.exception.*;
 
 /**
  *
@@ -19,6 +20,7 @@ public class LoginPanel extends javax.swing.JPanel implements LoginIF {
     /**
      * Creates new form LoginPanel
      */
+    @SuppressWarnings("LeakingThisInConstructor")
     public LoginPanel() {
         initComponents();
         LBL_ERROR.setVisible(false);
@@ -130,7 +132,7 @@ public class LoginPanel extends javax.swing.JPanel implements LoginIF {
     }
 
     @Override
-    public void InvalidLogin() {
+    public void InvalidLogin(InvalidAccountException e) {
         TXT_NAME.setText("");
         TXT_PASSWORD.setText("");
     }
