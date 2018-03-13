@@ -43,7 +43,7 @@ public class RPJServer extends AbstractServer {
     }
     
      public static void main(String[] args){
-        RPJServer server = new RPJServer(12345, null);
+        RPJServer server = new RPJServer(0, null);
         try {
             server.listen();
         } catch (IOException ex) {
