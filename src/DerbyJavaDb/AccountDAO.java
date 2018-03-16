@@ -5,18 +5,20 @@
  */
 package DerbyJavaDb;
 
+import java.sql.SQLException;
 import rpjava.common.Account;
+import rpjava.common.User;
 
 /**
  *
  * @author doude
  */
-public abstract class AccountDAO {
+public interface  AccountDAO {
     
-    public abstract Account signIn(String login, String password);
-    public abstract Boolean signUp(String login, String password);
-    public abstract Boolean updateAccount(String login, String password);
-    public abstract Boolean deleteAccout(String login, String password);
+    public abstract User signIn(Account account) throws SQLException;
+    public abstract Boolean signUp(Account account) throws SQLException;
+    public abstract Boolean updateAccount(Account account) throws SQLException;
+    public abstract Boolean deleteAccout(Account account) throws SQLException;
     
     
 }
