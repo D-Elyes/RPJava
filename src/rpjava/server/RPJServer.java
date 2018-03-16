@@ -29,7 +29,7 @@ public class RPJServer extends AbstractServer {
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
         if(msg instanceof Account){
-            User userConnected = null; // Get user from database
+            User userConnected = accountDAO.signIn((Account)msg);
             try{
                 if (userConnected != null){
                     client.sendToClient(userConnected);
@@ -43,9 +43,10 @@ public class RPJServer extends AbstractServer {
     }
     
      public static void main(String[] args){
-        RPJServer server = new RPJServer(0, null);
+        RPJServer server = new RPJServer(12345, null);
         try {
             server.listen();
+            System.out.println("Server listening on port " + server.getPort());
         } catch (IOException ex) {
             Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
         }

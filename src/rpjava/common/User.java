@@ -5,13 +5,14 @@
  */
 package rpjava.common;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
- * @author Elwès
+ * @author Florent BERLAND
  */
-public class User {
+public class User implements Serializable {
     
     private String nickName;
     private int age;

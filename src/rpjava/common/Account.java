@@ -5,11 +5,13 @@
  */
 package rpjava.common;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Florent BERLAND
  */
-public class Account {
+public class Account implements Serializable {
     
     private String login, password;
     
