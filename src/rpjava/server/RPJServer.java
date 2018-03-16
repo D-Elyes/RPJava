@@ -29,14 +29,14 @@ public class RPJServer extends AbstractServer {
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
         if(msg instanceof Account){
-            User userConnected = accountDAO.signIn((Account)msg);
             try{
+                User userConnected = accountDAO.signIn((Account)msg);
                 if (userConnected != null){
                     client.sendToClient(userConnected);
                 } else {
                     client.sendToClient(new InvalidAccountException());
                 }
-            } catch (IOException e){
+            } catch (Exception e){
                 
             }
         }
