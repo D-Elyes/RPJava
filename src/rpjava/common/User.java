@@ -19,11 +19,10 @@ public class User implements Serializable {
     private Collection<User> friends;
     private Account account;
 
-    public User(String nickName, int age, Account account) {
+    public User(String nickName, int age) {
         this.nickName = nickName;
         this.age = age;
         friends = new LinkedList<>();
-        this.account = account;
     }
 
     public String getNickName() {
