@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import rpjava.common.*;
 import rpjava.common.exception.InvalidAccountException;
+import rpjava.common.wrappers.*;
 
 /**
  *
@@ -36,7 +37,7 @@ public class ClientConsole implements LoginIF {
             String username = br.readLine();
             System.out.print("Password : ");
             String password = br.readLine();
-            client.sendToServer(new Account(username, password));
+            client.sendToServer(new AccountQuery(new Account(username, password), AccountQuery.QueryType.SIGNIN));
         } catch (IOException ex) {
             this.connectionException(ex);
         }
@@ -55,7 +56,7 @@ public class ClientConsole implements LoginIF {
 
     @Override
     public void connectionException(Exception e) {
-        System.out.println("An error occured while trying to connect to server");
+        System.out.println("An error occured whilst trying to connect to server");
         try {
             System.in.read();
         } catch (IOException ex) {

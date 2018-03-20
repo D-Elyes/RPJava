@@ -17,7 +17,7 @@ public interface  AccountDAO {
     
     public abstract User signIn(Account account) throws SQLException;
     public abstract Boolean signUp(Account account) throws SQLException;
-    public abstract Boolean updateAccount(Account account) throws SQLException;
+    public abstract Boolean updateAccount(Account oldValue, Account newValue) throws SQLException;
     public abstract Boolean deleteAccout(Account account) throws SQLException;
     
     
