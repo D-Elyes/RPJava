@@ -43,7 +43,7 @@ public class RPJServer extends AbstractServer {
     }
     
      public static void main(String[] args){
-        RPJServer server = new RPJServer(12345, null);
+        RPJServer server = new RPJServer(12345, new AccountDaoDerby());
         try {
             server.listen();
             System.out.println("Server listening on port " + server.getPort());
