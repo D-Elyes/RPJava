@@ -23,29 +23,35 @@ public class AccountDaoDerby implements AccountDAO {
     @Override
     public User signIn(Account account) throws SQLException
     {
+         System.out.println("NULLLLLLLLLLLLLL");
         String req = "SELECT * FROM ACCOUNT WHERE LOGIN='"+account.getLogin()+"' AND PASSWORD='"+account.getPassword()+"'";
         
         ResultSet res = con.createStatement().executeQuery(req);
-        
-        if(res == null)
+       
+        if(res.next() == false)
         {
+            
             return null;
         }
-        res.next();
         
+         res.next();
        
-        
+         
         String reqUser = "SELECT * FROM USERS u WHERE u.IDACCOUNT="+res.getInt("IDACCOUNT");
         
         ResultSet resUser = con.createStatement().executeQuery(reqUser);
         
-        if(resUser == null)
+        if(resUser.next() == false)
+        {
+            
             return null;
+        }
+            
         
         resUser.next();
         
         User user = new User(resUser.getString("NICKNAME"), resUser.getInt("AGE"));
-        
+         
         return user;
                   
         
