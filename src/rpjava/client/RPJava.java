@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import rpjava.common.Account;
 import rpjava.common.User;
@@ -25,34 +26,47 @@ public class RPJava extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-      
+        Group root = new Group();
+        Scene scene = new Scene(root,1000,680);
+        
+        
+        
+        primaryStage.setTitle("RPJava");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        
+        
+        
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //launch(args);
-        AccountDaoDerby test = new AccountDaoDerby();
-        
-        Account acc = new Account("test", "123456");
-        
-        try
-        {
-            User user = test.signIn(acc);
-            if(user != null)
+        launch(args);
+      /* AccountDaoDerby test = new AccountDaoDerby();
+       Account a = new Account("rien", "je sais pas");
+       
+       try
+       {
+            User u = test.signIn(a);
+            if(u != null)
             {
-                System.out.println(user.getNickName()+"\n"+user.getAge()+"\n");
+                System.out.println("Je suis connecté !!!!!!!!!!");
             }
-        }
-        catch(SQLException e)
-        {
-            System.out.println(e.getMessage());
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
+            else
+            {
+                System.out.println("NOOOOOOOOOOOOOOOOOOOO");
+            }
+       }
+       catch(Exception e)
+       {
+           System.out.println(e.getMessage());
+       }*/
+      
+       
+       
+        
     }
     
 }
