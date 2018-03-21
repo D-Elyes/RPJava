@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -66,7 +67,7 @@ public class AccountDaoDerby implements AccountDAO {
     //This method will handle the update of an account
     ///It returns true if the update succeed, else false
     @Override
-    public Boolean updateAccount(Account account) {
+    public Boolean updateAccount(Account oldValue, Account newValue) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -76,8 +77,6 @@ public class AccountDaoDerby implements AccountDAO {
     public Boolean deleteAccout(Account account) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
     
     
 }

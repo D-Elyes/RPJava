@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import lib.ocsf.server.*;
 import rpjava.common.*;
 import rpjava.common.exception.*;
+import rpjava.common.wrappers.*;
 
 /**
  *
@@ -28,16 +29,44 @@ public class RPJServer extends AbstractServer {
 
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-        if(msg instanceof Account){
-            try{
-                User userConnected = accountDAO.signIn((Account)msg);
-                if (userConnected != null){
-                    client.sendToClient(userConnected);
-                } else {
-                    client.sendToClient(new InvalidAccountException());
+        if(msg instanceof AccountQuery){
+            AccountQuery query = (AccountQuery)msg;
+            switch(query.getType()){
+                case SIGNIN: {
+                    try{
+                        User userConnected = accountDAO.signIn(query.getAccount());
+                        if (userConnected != null){
+                            client.sendToClient(userConnected);
+                        } else {
+                            client.sendToClient(new InvalidAccountException("Unknown identifier or password"));
+                        }
+                    } catch (Exception e){}
+                    break;
                 }
-            } catch (Exception e){
-                
+                case SIGNUP: {
+                    try{
+                        if (accountDAO.signUp(query.getAccount())){
+                            client.sendToClient(query.getAccount());
+                        } else {
+                            client.sendToClient(new InvalidAccountException("Cannot create an account with this name"));
+                        }
+                    } catch (Exception e){}
+                    break;
+                }
+                case UPDATE: {
+                    break;
+                }
+                case DELETE: {
+                    try{
+                        if(accountDAO.deleteAccout(query.getAccount())){
+                            
+                        } else {
+                            client.sendToClient(new InvalidAccountException("Cannot delete this account"));
+                        }
+                    } catch (Exception e){}
+                    break;
+                }
+                default : break;
             }
         }
     }
