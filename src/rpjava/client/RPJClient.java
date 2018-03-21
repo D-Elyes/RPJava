@@ -6,7 +6,7 @@
 package rpjava.client;
 
 import rpjava.common.exception.*;
-import ocsf.client.AbstractClient;
+import lib.ocsf.client.AbstractClient;
 import rpjava.common.*;
 
 /**

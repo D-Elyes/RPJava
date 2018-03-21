@@ -8,11 +8,13 @@ package rpjava.common;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Florent BERLAND
  */
-public class Account {
+public class Account implements Serializable {
     
     private StringProperty login, password;
     
