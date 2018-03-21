@@ -5,33 +5,48 @@
  */
 package rpjava.common;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author Florent BERLAND
  */
 public class Account {
     
-    private String login, password;
+    private StringProperty login, password;
     
     public Account(String login, String password) {
-        this.login = login;
-        this.password = password;
+        this.login = new SimpleStringProperty(login);
+        this.password = new SimpleStringProperty(password);
     }
 
+    //Getter et setter of property value
     public String getLogin() {
-        return login;
+        return login.get();
     }
 
     public void setLogin(String login) {
-        this.login = login;
+        this.login.set(login);
     }
 
     public String getPassword() {
-        return password;
+        return password.get();
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password.set(password);
+    }
+    
+    //getter and setter of properties
+    public StringProperty loginProperty()
+    {
+        return login;
+    }
+    
+    public StringProperty passwordProperty()
+    {
+        return password;
     }
     
 }
