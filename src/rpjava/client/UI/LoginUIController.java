@@ -33,8 +33,6 @@ public class LoginUIController implements Initializable,LoginIF {
     @FXML
     private TextField passwordTextField;
     
-    @FXML
-    private Button signInButton;
     
     @FXML
     private Label SignUpLabel;
@@ -48,13 +46,21 @@ public class LoginUIController implements Initializable,LoginIF {
     private RPJClient client;
     
     //The constructor
-    public LoginUIController()
+    public LoginUIController(String host, int port)
     {
        
-        
+        try
+        {
+            client = new RPJClient(host, port, this);
+             client.openConnection();
+        }
+        catch(IOException e)
+        {
+               System.out.println(e.getMessage());
+        }
     }
     
-    public void initConnectioToServer(String host, int port)
+    /*public void initConnectioToServer(String host, int port)
     {
         
          try
@@ -66,7 +72,7 @@ public class LoginUIController implements Initializable,LoginIF {
         {
                System.out.println(e.getMessage());
         }
-    }
+    }*/
     
     
 
@@ -101,8 +107,7 @@ public class LoginUIController implements Initializable,LoginIF {
         Account acc = new Account(loginTextField.getText(), passwordTextField.getText());
         AccountQuery accQuery = new AccountQuery(acc, AccountQuery.QueryType.SIGNIN);
         try
-        {
-            
+        {   
             client.sendToServer(accQuery);
         }
         catch(IOException e)

@@ -77,7 +77,9 @@ public class RPJavaMainApp extends Application {
         {
              
             FXMLLoader loader = new FXMLLoader();
+            LoginUIController controller =  new LoginUIController(host, port);
             loader.setLocation(RPJavaMainApp.class.getResource("LoginUI.fxml"));
+            loader.setController(controller);
             AnchorPane loginUI = (AnchorPane) loader.load();
             
             
@@ -86,13 +88,16 @@ public class RPJavaMainApp extends Application {
             
             //give the controller access to the main app
             
-            //LoginUIController controller =  new LoginUIController(host, port);
-            LoginUIController controller = loader.getController();
+           
+            //LoginUIController controller = loader.getController();
             
-           controller.initConnectioToServer(host,port);
+           // controller.initConnectioToServer(host,port);
+            
 
-            loader.setController(controller);
+            //loader.setController(controller);
             controller.setRPJavaMainApp(this);
+            
+           
         }
         catch(IOException e)
         {
