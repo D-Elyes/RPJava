@@ -3,23 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/RPJavaMainApp.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/LoginIF.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/server/AbstractFactoryDao.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/DerbyJavaDb/DbConnection.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/common/Account.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/DerbyJavaDb/AccountDAO.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/server/RPJServer.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/ClientConsole.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/RPJClient.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/lib/ocsf/server/AbstractServer.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/common/wrappers/AccountQuery.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/LoginUIController.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/lib/ocsf/client/AbstractClient.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/LoginUI.fxml</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/DerbyJavaDb/AccountDaoDerby.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/server/FactoryDaoDerby.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/lib/ocsf/server/ConnectionToClient.java</file>
+            <file>file:/C:/Users/Elwès/Travail/S8/RPJava/src/rpjava/client/ClientConsole.java</file>
         </group>
     </open-files>
 </project-private>
