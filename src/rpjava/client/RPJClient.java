@@ -15,17 +15,17 @@ import rpjava.common.*;
  */
 public class RPJClient extends AbstractClient {
 
-    private static RPJClient client;
-    public static RPJClient getClient(String host, int port, LoginIF clientUI){
+   // private static RPJClient client;
+    /*public static RPJClient getClient(String host, int port, LoginIF clientUI){
         if (client == null){
             client = new RPJClient(host, port, clientUI);
         }
         return client;
-    }
+    }*/
     
     LoginIF loginUI;
     
-    private RPJClient(String host, int port, LoginIF loginUI) {
+    public RPJClient(String host, int port, LoginIF loginUI) {
         super(host, port);
         this.loginUI = loginUI;
     }

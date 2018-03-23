@@ -23,6 +23,9 @@ import javafx.stage.Stage;
  */
 public class RPJavaMainApp extends Application {
     
+    private String host = "localhost";
+    private int port = 12345;
+    
     private Stage primaryStage;
     private BorderPane rootLayout;
     
@@ -72,15 +75,28 @@ public class RPJavaMainApp extends Application {
     {
         try
         {
-             System.out.println("*********HI*********");
+             
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(RPJavaMainApp.class.getResource("LoginUI.fxml"));
             AnchorPane loginUI = (AnchorPane) loader.load();
             
+            
             rootLayout.setCenter(loginUI);
+            
+            
+            //give the controller access to the main app
+            
+            //LoginUIController controller =  new LoginUIController(host, port);
+            LoginUIController controller = loader.getController();
+            
+           controller.initConnectioToServer(host,port);
+
+            loader.setController(controller);
+            controller.setRPJavaMainApp(this);
         }
         catch(IOException e)
         {
+            System.out.println(e.getMessage());
             e.printStackTrace();   
         }
         catch(Exception e)

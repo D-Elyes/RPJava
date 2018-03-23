@@ -16,39 +16,29 @@ import java.io.Serializable;
  */
 public class Account implements Serializable {
     
-    private StringProperty login, password;
+    private String login, password;
     
     public Account(String login, String password) {
-        this.login = new SimpleStringProperty(login);
-        this.password = new SimpleStringProperty(password);
+        this.login = login;
+        this.password =  password;
     }
 
     //Getter et setter of property value
     public String getLogin() {
-        return login.get();
+        return login;
     }
 
     public void setLogin(String login) {
-        this.login.set(login);
+        this.login = login;
     }
 
     public String getPassword() {
-        return password.get();
+        return password;
     }
 
     public void setPassword(String password) {
-        this.password.set(password);
+        this.password = password;
     }
     
-    //getter and setter of properties
-    public StringProperty loginProperty()
-    {
-        return login;
-    }
-    
-    public StringProperty passwordProperty()
-    {
-        return password;
-    }
     
 }

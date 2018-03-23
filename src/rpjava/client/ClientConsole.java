@@ -21,7 +21,7 @@ public class ClientConsole implements LoginIF {
     RPJClient client;
     
     public ClientConsole(String ip, int port){
-        client = RPJClient.getClient(ip, port, this);
+        client = new RPJClient(ip, port, this);
         try {
             client.openConnection();
         } catch (IOException ex) {

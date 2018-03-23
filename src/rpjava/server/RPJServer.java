@@ -33,6 +33,7 @@ public class RPJServer extends AbstractServer {
             AccountQuery query = (AccountQuery)msg;
             switch(query.getType()){
                 case SIGNIN: {
+                    
                     try{
                         User userConnected = accountDAO.signIn(query.getAccount());
                         if (userConnected != null){
@@ -72,7 +73,9 @@ public class RPJServer extends AbstractServer {
     }
     
      public static void main(String[] args){
-        RPJServer server = new RPJServer(12345, new AccountDaoDerby());
+         AbstractFactoryDao factory = new FactoryDaoDerby();
+         
+        RPJServer server = new RPJServer(12345, factory.createAccountDao());
         try {
             server.listen();
             System.out.println("Server listening on port " + server.getPort());

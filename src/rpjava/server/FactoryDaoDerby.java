@@ -6,12 +6,17 @@
 package rpjava.server;
 
 import DerbyJavaDb.AccountDAO;
+import DerbyJavaDb.AccountDaoDerby;
 
 /**
  *
  * @author doude
  */
-public interface AbstractFactoryDao {
+public class FactoryDaoDerby implements AbstractFactoryDao {
+
+    @Override
+    public AccountDAO createAccountDao() {
+        return new AccountDaoDerby();
+    }
     
-    public AccountDAO createAccountDao();
 }
