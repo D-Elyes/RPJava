@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rpjava.client.UI.LoginUIController">
+<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="loginTextField" layoutX="500.0" layoutY="315.0" promptText="Login" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="500.0" />
       <Label layoutX="317.0" layoutY="314.0" prefHeight="28.0" prefWidth="59.0" text="Login" AnchorPane.bottomAnchor="338.0" AnchorPane.rightAnchor="604.0">
