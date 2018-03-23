@@ -16,7 +16,7 @@ import rpjava.common.wrappers.*;
  *
  * @author Florent BERLAND
  */
-public class ClientConsole implements LoginIF {
+public class ClientConsole implements UIIF {
 
     RPJClient client;
     
@@ -43,18 +43,15 @@ public class ClientConsole implements LoginIF {
         }
     }
     
-    @Override
     public void receiveUserData(User u) {
         System.out.println("Succesfully connected to server.\nNickname : " + u.getNickName());
     }
 
-    @Override
-    public void InvalidLogin(InvalidAccountException e) {
+    public void invalidLogin(InvalidAccountException e) {
         System.out.println("Invalid login or password. Please try again");
         login();
     }
 
-    @Override
     public void connectionException(Exception e) {
         System.out.println("An error occured whilst trying to connect to server");
         try {
@@ -67,6 +64,19 @@ public class ClientConsole implements LoginIF {
     
     public static void main(String[] args) throws IOException{
         ClientConsole cc = new ClientConsole("localhost", 12345);
+    }
+
+    @Override
+    public void handleMessage(Object msg) {
+        if(msg instanceof InvalidAccountException){
+            invalidLogin((InvalidAccountException)msg);
+        } else if(msg instanceof Exception){
+            connectionException((Exception)msg);
+        } else if(msg instanceof User){
+            receiveUserData((User)msg);
+        } else {
+            System.out.println("Error : object " + msg.getClass().getName() + " not valid for the login");
+        }
     }
     
 }

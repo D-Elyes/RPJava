@@ -23,24 +23,36 @@ public class RPJClient extends AbstractClient {
         return client;
     }*/
     
-    LoginIF loginUI;
+    private UIIF ui;
     
-    public RPJClient(String host, int port, LoginIF loginUI) {
+    public RPJClient(String host, int port, UIIF ui) {
         super(host, port);
-        this.loginUI = loginUI;
+        this.ui = ui;
+    }
+    
+    public RPJClient(String host, int port) {
+        super(host, port);
+    }
+    
+    public void setUI(UIIF ui){
+        this.ui = ui;
     }
     
     @Override
     protected void handleMessageFromServer(Object msg) {
-        if(msg instanceof User){
-            loginUI.receiveUserData((User)msg);
-        } else if (msg instanceof InvalidAccountException){
-            loginUI.InvalidLogin((InvalidAccountException)msg);
-        }
+        if(ui != null){
+            ui.handleMessage(msg);
+        } else {
+            System.err.println("Error : this instance of RPJClient does not have a ui");
+        }  
     }
     
     @Override
     protected void connectionException(Exception e) {
-        loginUI.connectionException(e);
+        if(ui != null){
+            ui.handleMessage(e);
+        } else {
+            System.err.println("Error : this instance of RPJClient does not have a ui");
+        }
     }
 }
