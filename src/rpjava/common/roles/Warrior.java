@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rpjava.common;
+package rpjava.common.roles;
+
+import rpjava.common.Role;
 
 /**
  *
