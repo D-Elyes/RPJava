@@ -5,7 +5,7 @@
  */
 package rpjava.server;
 
-import DerbyJavaDb.AccountDAO;
+import rpjava.server.dao.*;
 
 /**
  *
@@ -14,4 +14,5 @@ import DerbyJavaDb.AccountDAO;
 public interface AbstractFactoryDao {
     
     public AccountDAO createAccountDao();
+    public NpcDAO createNpcDao();
 }

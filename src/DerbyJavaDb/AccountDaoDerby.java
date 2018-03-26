@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import rpjava.common.Account;
 import rpjava.common.User;
+import rpjava.server.dao.AccountDAO;
 
 /**
  *
@@ -49,7 +50,7 @@ public class AccountDaoDerby implements AccountDAO {
             
         
         
-        User user = new User(resUser.getString("NICKNAME"), resUser.getInt("AGE"));
+        User user = new User(resUser.getString("NICKNAME"), resUser.getInt("AGE"), resUser.getInt("IDUSER"));
          
         return user;
                   
