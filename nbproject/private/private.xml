@@ -5,8 +5,8 @@
         <group>
             <file>file:/C:/Users/Elwès/Travail/S8/RPJava/src/DerbyJavaDb/NpcDaoDerby.java</file>
             <file>file:/C:/Users/Elwès/Travail/S8/RPJava/src/DerbyJavaDb/AccountDaoDerby.java</file>
-            <file>file:/C:/Users/Elwès/Travail/S8/RPJava/src/rpjava/server/dao/NpcDAO.java</file>
-            <file>file:/C:/Users/Elwès/Travail/S8/RPJava/src/rpjava/server/dao/AccountDAO.java</file>
+            <file>file:/C:/Users/Elwès/Travail/S8/RPJava/src/rpjava/common/Race.java</file>
+            <file>file:/C:/Users/Elwès/Travail/S8/RPJava/src/rpjava/common/NPC.java</file>
         </group>
     </open-files>
 </project-private>
