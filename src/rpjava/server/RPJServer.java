@@ -73,6 +73,7 @@ public class RPJServer extends AbstractServer {
     }
     
      public static void main(String[] args){
+         
          AbstractFactoryDao factory = new FactoryDaoDerby();
          
         RPJServer server = new RPJServer(12345, factory.createAccountDao());
