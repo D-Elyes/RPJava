@@ -33,6 +33,7 @@ public class RPJavaMainApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("RPJava");
+        this.primaryStage.setResizable(false);
         
         initRootLayout();
         
@@ -54,6 +55,7 @@ public class RPJavaMainApp extends Application {
             rootLayout = (BorderPane) loader.load();
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+            
             primaryStage.show();
         }
         catch(IOException e)

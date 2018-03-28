@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rpjava.server;
-
-import rpjava.server.dao.*;
+package rpjava.client;
 
 /**
  *
- * @author doude
+ * @author Florent BERLAND
  */
-public interface AbstractFactoryDao {
+public interface UIIF {
     
-    public AccountDAO createAccountDao();
-    public NpcDAO createNpcDao();
+    public void handleMessage(Object msg);
+    
 }

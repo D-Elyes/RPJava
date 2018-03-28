@@ -18,11 +18,13 @@ public class User implements Serializable {
     private int age;
     private Collection<User> friends;
     private Account account;
+    private int ID;
 
-    public User(String nickName, int age) {
+    public User(String nickName, int age, int ID) {
         this.nickName = nickName;
         this.age = age;
         friends = new LinkedList<>();
+        this.ID = ID;
     }
 
     public String getNickName() {
@@ -47,6 +49,10 @@ public class User implements Serializable {
 
     public Account getAccount() {
         return account;
+    }
+    
+    public int getID(){
+        return ID;
     }
     
 }

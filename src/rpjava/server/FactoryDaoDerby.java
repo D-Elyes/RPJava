@@ -5,8 +5,8 @@
  */
 package rpjava.server;
 
-import DerbyJavaDb.AccountDAO;
-import DerbyJavaDb.AccountDaoDerby;
+import rpjava.server.dao.*;
+import DerbyJavaDb.*;
 
 /**
  *
@@ -17,6 +17,11 @@ public class FactoryDaoDerby implements AbstractFactoryDao {
     @Override
     public AccountDAO createAccountDao() {
         return new AccountDaoDerby();
+    }
+    
+    @Override
+    public NpcDAO createNpcDao(){
+        return new NpcDaoDerby();
     }
     
 }

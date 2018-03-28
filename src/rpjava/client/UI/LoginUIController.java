@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import rpjava.client.LoginIF;
+import rpjava.client.UIIF;
 import rpjava.client.RPJClient;
 import rpjava.common.Account;
 import rpjava.common.User;
@@ -25,7 +25,7 @@ import rpjava.common.wrappers.AccountQuery;
  *
  * @author doude
  */
-public class LoginUIController implements Initializable,LoginIF {
+public class LoginUIController implements Initializable,UIIF {
     
     @FXML
     private TextField loginTextField;
@@ -58,6 +58,8 @@ public class LoginUIController implements Initializable,LoginIF {
         {
                System.out.println(e.getMessage());
         }
+        
+        
     }
     
     /*public void initConnectioToServer(String host, int port)
@@ -123,19 +125,28 @@ public class LoginUIController implements Initializable,LoginIF {
         
     }
     
-    @Override
     public void receiveUserData(User u) {
         System.out.println(u.getNickName());
     }
 
-    @Override
-    public void InvalidLogin(InvalidAccountException e) {
+    public void invalidLogin(InvalidAccountException e) {
         System.out.println("Login Invalid");
     }
 
-    @Override
     public void connectionException(Exception e) {
         System.out.println(e.getMessage());
     }
     
+    @Override
+    public void handleMessage(Object msg) {
+        if(msg instanceof InvalidAccountException){
+            invalidLogin((InvalidAccountException)msg);
+        } else if(msg instanceof Exception){
+            connectionException((Exception)msg);
+        } else if(msg instanceof User){
+            receiveUserData((User)msg);
+        } else {
+            System.out.println("Error : object " + msg.getClass().getName() + " not valid for the login");
+        }
+    }
 }

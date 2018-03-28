@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DerbyJavaDb;
+package rpjava.server.dao;
 
 import java.sql.SQLException;
 import rpjava.common.Account;

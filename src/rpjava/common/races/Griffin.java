@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rpjava.common;
+package rpjava.common.races;
+
+import rpjava.common.Race;
 
 /**
  *
@@ -22,7 +24,7 @@ public class Griffin extends Race {
 
     @Override
     public int getMaxHp(int level) {
-        return (int)Math.pow(level, 27)*this.getBaseHP();
+        return (int)Math.pow(level, .27)*this.getBaseHP();
     }
 
     @Override
