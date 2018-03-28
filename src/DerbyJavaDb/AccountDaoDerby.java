@@ -61,15 +61,38 @@ public class AccountDaoDerby implements AccountDAO {
     //This method will handle the creation of account
     //It will return true if the creation succeed, else false
     @Override
-    public Boolean signUp(Account account) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean signUp(Account account, User user) throws SQLException {
+        String checkExistingAccount = "SELECT * FROM ACCOUNT WHERE LOGIN = '" + account.getLogin() + "';";
+        ResultSet existing = con.createStatement().executeQuery(checkExistingAccount);
+        if (!existing.next()) { return false; }
+        
+        String addAccount = "INSERT INTO ACCOUNT (LOGIN,PASSWORD) VALUES ('"
+                + account.getLogin() + "','"
+                + account.getPassword() + "');";
+        con.createStatement().execute(addAccount);
+        
+        String addUser = "INSERT INTO USERS (NICKNAME, AGE, IDACCOUNT) VALUES ('"
+                + user.getNickName() + "',"
+                + user.getAge()
+                + ",(SELECT IDACCOUNT FROM ACCOUNT WHERE LOGIN = '" + account.getLogin() + "'));";
+        con.createStatement().execute(addUser);
+        return true;
     }
 
     //This method will handle the update of an account
     ///It returns true if the update succeed, else false
     @Override
-    public Boolean updateAccount(Account oldValue, Account newValue) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean updateAccount(Account oldValue, Account newValue) throws SQLException {
+        String checkUser = "SELECT * FROM ACCOUNT WHERE LOGIN = '" + oldValue.getLogin() + "';";
+        ResultSet res = con.createStatement().executeQuery(checkUser);
+        if (!res.next()) { return false; }
+        
+        String updateUser = "UPDATE ACCOUNT SET LOGIN = '" + newValue.getLogin() 
+                + "', PASSWORD = '" + newValue.getPassword()
+                + "' WHERE LOGIN = '" + oldValue.getLogin()
+                + "' AND PASSWORD = '" + oldValue.getPassword() + "';";
+        con.createStatement().execute(updateUser);
+        return true;
     }
 
     //This methos will handle the delete of an account

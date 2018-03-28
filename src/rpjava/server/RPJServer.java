@@ -6,7 +6,6 @@
 package rpjava.server;
 
 import rpjava.server.dao.*;
-import DerbyJavaDb.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -64,7 +63,7 @@ public class RPJServer extends AbstractServer {
         switch(query.getType()){
             case SIGNIN: {                   
                 try{
-                    User userConnected = accountDAO.signIn(query.getAccount());
+                    User userConnected = accountDAO.signIn((Account)query.getData());
                     if (userConnected != null){
                         client.sendToClient(userConnected);
                     } else {
@@ -75,8 +74,9 @@ public class RPJServer extends AbstractServer {
             }
             case SIGNUP: {
                 try{
-                    if (accountDAO.signUp(query.getAccount())){
-                        client.sendToClient(query.getAccount());
+                    Object[] data = (Object[])query.getData();
+                    if (accountDAO.signUp((Account)data[0], (User)data[1])){
+                        client.sendToClient((User)data[1]);
                     } else {
                         client.sendToClient(new InvalidAccountException("Cannot create an account with this name"));
                     }
@@ -84,11 +84,17 @@ public class RPJServer extends AbstractServer {
                 break;
             }
             case UPDATE: {
+                Account[] data = (Account[])query.getData();
+                try {
+                    accountDAO.updateAccount(data[0], data[1]);
+                } catch (SQLException ex) {
+                    Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
             case DELETE: {
                 try{
-                    if(accountDAO.deleteAccout(query.getAccount())){                      
+                    if(accountDAO.deleteAccout((Account)query.getData())){                      
                     } else {
                         client.sendToClient(new InvalidAccountException("Cannot delete this account"));
                     }

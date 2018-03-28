@@ -14,14 +14,16 @@ public class NPC extends Character {
     private Race race;
     private boolean isBoss;
     private boolean isAgressive;
+    private String speech;
     
-    public NPC(Race race, String name, boolean isBoss, boolean isAgressive){
+    public NPC(Race race, String name, boolean isAgressive, boolean isBoss, String speech){
         super(name);
         this.race = race;
         this.isBoss = isBoss;
         this.isAgressive = isAgressive;
+        this.speech = speech;
     }
-
+    
     public boolean isBoss() {
         return isBoss;
     }
@@ -40,6 +42,14 @@ public class NPC extends Character {
 
     public Race getRace() {
         return race;
+    }
+
+    public String getSpeech() {
+        return speech;
+    }
+
+    public void setSpeech(String speech) {
+        this.speech = speech;
     }
 
     @Override

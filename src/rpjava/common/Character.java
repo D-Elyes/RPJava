@@ -32,6 +32,10 @@ public abstract class Character {
         return (int)Math.pow(xp/20, .8) + 1;
     }
     
+    public void setLevel(int value){
+        xp = (float)(20/Math.pow(value-1, .8));
+    }
+    
     public abstract int getMaxHp();
     public abstract int getMaxMana();
     public abstract float getAttack();
