@@ -21,13 +21,13 @@ public class NpcDaoDerby implements NpcDAO {
     @Override
     public NPC[] getNpcs(int userID) throws SQLException {
         
-        String req = "SELECT * FROM GENERICNPC WHERE USERID='"+userID+"'";
+        String req = "SELECT * FROM GENERICNPC WHERE USERID = " + userID + ";";
         
         ResultSet res = con.createStatement().executeQuery(req);
         
         Collection<NPC> col = new LinkedList<>();
         while(res.next()){
-            NPC npc = new NPC(Race.createFromName("RACE"), res.getString("NAME"), res.getBoolean("ISBOSS"), res.getBoolean("ISAGRESSIVE"));
+            NPC npc = new NPC(Race.createFromName(res.getString("RACE")), res.getString("NAME"), res.getBoolean("ISBOSS"), res.getBoolean("ISAGRESSIVE"));
             col.add(npc);
         }
         
@@ -44,21 +44,40 @@ public class NpcDaoDerby implements NpcDAO {
                 + npc.isAgressive() + ","
                 + npc.isBoss() + ","
                 + npc.getLevel() + ","
-                + ") WHERE USERID='"+userID+"'";
+                + ") WHERE USERID='"+userID+"';";
         
-        ResultSet res = con.createStatement().executeQuery(req);
-        
-        return true;
+        return con.createStatement().execute(req);
     }
 
     @Override
     public boolean updateNpc(int userID, NPC oldValue, NPC newValue) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String req = "UPDATE GENERICNPC SET "
+                + "NAME = '" + newValue.getName()
+                + "', RACE = '" + newValue.getRace().getClassName()
+                + "', ISAGRESSIVE = " + newValue.isAgressive()
+                + ", ISBOSS = " + newValue.isBoss()
+                + ", DEFAULTLEVEL = " + newValue.getLevel()
+                + " WHERE IDUSER = " + userID
+                + " AND NAME = '" + oldValue.getName()
+                + "' AND RACE = '" + oldValue.getRace().getClassName()
+                + "' AND ISAGRESSIVE = " + oldValue.isAgressive()
+                + " AND ISBOSS = " + oldValue.isBoss()
+                + " AND DEFAULTLEVEL = " + oldValue.getLevel() + ";";
+        
+        return con.createStatement().execute(req);
     }
 
     @Override
     public boolean deleteNpc(int userID, NPC npc) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        String req = "DELETE FROM GENERICNPC WHERE USERID = " + userID
+                + " AND NAME = '" + npc.getName()
+                + "' AND RACE = '" + npc.getRace().getClassName()
+                + "' AND ISAGRESSIVE = " + npc.isAgressive()
+                + " AND ISBOSS = " + npc.isBoss()
+                + " AND DEFAULTLEVEL = " + npc.getLevel() + ";";
+        
+        return con.createStatement().execute(req);
     }
     
 }

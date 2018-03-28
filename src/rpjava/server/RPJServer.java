@@ -8,6 +8,7 @@ package rpjava.server;
 import rpjava.server.dao.*;
 import DerbyJavaDb.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lib.ocsf.server.*;
@@ -99,7 +100,48 @@ public class RPJServer extends AbstractServer {
     }
     
     protected void handleNpcQuery(int userID, UserRequest.UserRequestAction action, Object data, ConnectionToClient client){
-        
+        switch(action) {
+            case GET:{
+                try {
+                    NPC[] result = this.npcDAO.getNpcs(userID);
+                    client.sendToClient(new UserResult(result, UserRequest.UserRequestOn.NPCS));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException e) {}
+                break;
+            }
+            case SAVE:{
+                try {
+                    if (this.npcDAO.addNpc(userID, (NPC)data));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            }
+            case UPDATE:{
+                try {
+                    this.npcDAO.updateNpc(userID, ((NPC[])data)[0], ((NPC[])data)[1]);
+                } catch (SQLException ex) {
+                    Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            }
+            case DELETE:{
+                try {
+                    this.npcDAO.deleteNpc(userID, (NPC)data);
+                } catch (SQLException ex) {
+                    Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            }
+            default:{
+            try {
+                client.sendToClient(new InvalidRequestException("Verb " + action.toString() + " does not exist"));
+            } catch (IOException ex) {
+                Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+        }
     }
     
      public static void main(String[] args){
