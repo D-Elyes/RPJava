@@ -14,16 +14,16 @@ import rpjava.common.*;
  */
 public class AccountQuery implements Serializable {
     
-    private Account account;
+    private Object data;
     private QueryType type;
-    
-    public AccountQuery(Account account, QueryType type){
-        this.account = account;
+
+    public AccountQuery(Object data, QueryType type) {
+        this.data = data;
         this.type = type;
     }
 
-    public Account getAccount() {
-        return account;
+    public Object getData() {
+        return data;
     }
 
     public QueryType getType() {
