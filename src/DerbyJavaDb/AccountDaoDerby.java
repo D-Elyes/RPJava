@@ -14,14 +14,30 @@ import rpjava.common.User;
 import rpjava.server.dao.AccountDAO;
 
 /**
- *
- * @author doude
+ * This classe allows you to manage the system of Account in the Derby Java DDatabase.
+ * @author RPJavaTeam
+ * @version 1.0
  */
 public class AccountDaoDerby implements AccountDAO {
 
+// INSTANCE VARIABLES ***********************************************
+     
+    /**
+      * Creation of the connection to Database. Can't be changed.
+     */ 
     private Connection con = DbConnection.getInstance();
-    //This method will handle the connection to the server
-    //It will return a User if the login succeed, else return null
+    
+    
+    
+// INSTANCE METHODS ***********************************************
+    
+    
+    /**
+     * This method will handle the connection to the server.
+     * @param account The account used to sign in (composed of a login and a password)
+     * @return User If the login and password correspond in the database
+     * @throws SQLException If an error occured, connection to the database failed
+     */ 
     @Override
     public User signIn(Account account) throws SQLException
     {
@@ -58,8 +74,13 @@ public class AccountDaoDerby implements AccountDAO {
         
     }
 
-    //This method will handle the creation of account
-    //It will return true if the creation succeed, else false
+    /**
+     * This method will handle the creation of an account
+     * @param account The account used to sign up (composed of a login and a password)
+     * @param user The user who wants to create its account
+     * @return Boolean True if the signing up succeeded, false else
+     * @throws SQLException If an error occured, connection to the database failed
+     */ 
     @Override
     public Boolean signUp(Account account, User user) throws SQLException {
         String checkExistingAccount = "SELECT * FROM ACCOUNT WHERE LOGIN = '" + account.getLogin() + "';";
@@ -78,9 +99,16 @@ public class AccountDaoDerby implements AccountDAO {
         con.createStatement().execute(addUser);
         return true;
     }
-
-    //This method will handle the update of an account
-    ///It returns true if the update succeed, else false
+    
+    
+    /**
+     * This method will handle the update of an account.
+     * @param oldValue The current account values
+     * @param newValue The new account values
+     * @return Boolean True if the update succeeded, false else
+     * @throws SQLException If an error occured, connection to the database failed
+     */ 
+    
     @Override
     public Boolean updateAccount(Account oldValue, Account newValue) throws SQLException {
         String checkUser = "SELECT * FROM ACCOUNT WHERE LOGIN = '" + oldValue.getLogin() + "';";
@@ -95,8 +123,14 @@ public class AccountDaoDerby implements AccountDAO {
         return true;
     }
 
-    //This methos will handle the delete of an account
-    //it will return false if the delete fails, else true
+ /**
+     * This method will handle the deletion of an account.
+     * Currently, this method is not implemented.
+     * @param account The account which has to be deleted
+     * @return Boolean True if the deletion succeeded, false else
+     * @throws SQLException If an error occured, connection to the database failed
+     */ 
+
     @Override
     public Boolean deleteAccout(Account account) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
