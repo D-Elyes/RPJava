@@ -8,11 +8,13 @@ package rpjava.client.UI;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import rpjava.client.UIIF;
 import rpjava.client.RPJClient;
 import rpjava.common.Account;
@@ -35,7 +37,7 @@ public class LoginUIController implements Initializable,UIIF {
     
     
     @FXML
-    private Label SignUpLabel;
+    private Label signUpLabel;
     
     @FXML
     private Label forgetPassLabel;
@@ -48,6 +50,12 @@ public class LoginUIController implements Initializable,UIIF {
     //The constructor
     public LoginUIController(String host, int port)
     {
+        signUpLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+               handleSignUp();
+            }
+        });
        
         try
         {
@@ -124,6 +132,15 @@ public class LoginUIController implements Initializable,UIIF {
         
         
     }
+    
+    @FXML
+    public void handleSignUp()
+    {
+        SignUpUIController signUpUiController = new SignUpUIController(client);
+        mainApp.showSignUpUI(signUpUiController);
+        
+    }
+    
     
     public void receiveUserData(User u) {
         System.out.println(u.getNickName());

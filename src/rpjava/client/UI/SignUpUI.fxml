@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="980.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="837.0" layoutY="18.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="121.0" text="Home" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="18.0">
          <font>
@@ -34,15 +33,15 @@
             <Font size="29.0" />
          </font>
       </Label>
-      <Label layoutX="244.0" layoutY="365.0" prefHeight="43.0" prefWidth="241.0" text="Confirm Password" AnchorPane.bottomAnchor="272.0" AnchorPane.rightAnchor="495.0" AnchorPane.topAnchor="365.0">
+      <Label layoutX="233.0" layoutY="379.0" prefHeight="43.0" prefWidth="241.0" text="Confirm Password" AnchorPane.bottomAnchor="258.0" AnchorPane.rightAnchor="506.0" AnchorPane.topAnchor="379.0">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <TextField layoutX="592.0" layoutY="243.0" />
-      <TextField layoutX="592.0" layoutY="315.0" />
-      <TextField layoutX="585.0" layoutY="375.0" />
-      <TextField layoutX="592.0" layoutY="451.0" />
+      <TextField fx:id="loginTF" layoutX="592.0" layoutY="243.0" />
+      <TextField fx:id="passwordTF" layoutX="592.0" layoutY="315.0" />
+      <TextField fx:id="confirmPassTF" layoutX="591.0" layoutY="388.0" />
+      <TextField fx:id="emailTF" layoutX="592.0" layoutY="451.0" />
       <Button layoutX="666.0" layoutY="582.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="103.0" text="Send">
          <font>
             <Font size="18.0" />

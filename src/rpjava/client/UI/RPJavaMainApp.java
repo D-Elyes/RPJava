@@ -60,6 +60,7 @@ public class RPJavaMainApp extends Application {
         }
         catch(IOException e)
         {
+            
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
@@ -98,6 +99,50 @@ public class RPJavaMainApp extends Application {
 
             //loader.setController(controller);
             controller.setRPJavaMainApp(this);
+            
+           
+        }
+        catch(IOException e)
+        {
+            System.out.println("In the login UI init");
+            System.out.println(e.getMessage());
+            e.printStackTrace();   
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void showSignUpUI(SignUpUIController controller)
+    {
+         try
+        {
+             
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(RPJavaMainApp.class.getResource("SignUpUI.fxml"));
+            loader.setController(controller);
+            AnchorPane signUpUI = (AnchorPane) loader.load();
+            
+           // primaryStage.setScene(value);
+           // rootLayout.setCenter(signUpUI);
+            
+            
+            //give the controller access to the main app
+            
+           
+            //LoginUIController controller = loader.getController();
+            
+           // controller.initConnectioToServer(host,port);
+            
+
+            //loader.setController(controller);
+            controller.setRPJavaMainApp(this);
+            
+            Scene signUpScene = new Scene(signUpUI);
+            primaryStage.setScene(signUpScene);
+            primaryStage.show();
             
            
         }
