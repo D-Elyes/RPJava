@@ -25,12 +25,14 @@ public class RPJServer extends AbstractServer {
     AccountDAO accountDAO;
     NpcDAO npcDAO;
     MapDAO mapDAO;
+    CharacterDAO characterDAO;
     
     public RPJServer(int port, AbstractFactoryDao daoGenerator) {
         super(port);
         this.accountDAO = daoGenerator.createAccountDao();
         this.npcDAO = daoGenerator.createNpcDao();
         this.mapDAO = daoGenerator.createMapDao();
+        this.characterDAO = daoGenerator.createCharacterDAO();
     }
 
     @Override
@@ -48,6 +50,9 @@ public class RPJServer extends AbstractServer {
                 }
                 case NPCS:{
                     handleNpcQuery(request.getUserID(), request.getAction(), request.getData(), client);
+                    break;
+                }
+                case CHARSET:{
                     break;
                 }
                 default:{

@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rpjava.common.races;
+package rpjava.common.roles;
 
-import rpjava.common.Race;
+import rpjava.common.Role;
 
 /**
  *
  * @author Florent BERLAND
  */
-public class DefaultRace extends Race {
-
-    public DefaultRace(){
-        super(100,100,1,1);
-    }
+public class DefaultRole extends Role{
     
+    public DefaultRole() {
+        super(100, 100, 1f, 1f);
+    }
+
     @Override
     public String getRoleName() {
-        return "Default race";
+        return "Default role";
     }
 
     @Override
@@ -41,5 +41,4 @@ public class DefaultRace extends Race {
     public float getDefence(int level) {
         return (int)(1+level/100f)*this.getBaseDefence();
     }
-    
 }

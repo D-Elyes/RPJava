@@ -13,15 +13,29 @@ public class Player extends Character {
 
     Role role;
     Inventory inv;
+    User user;
     
-    public Player(Role role, String name, int inventorySize){
+    public Player(User user, Role role, String name, int inventorySize){
         super(name);
+        this.user = user;
         this.role = role;
         inv = new Inventory(inventorySize);
     }
     
     public Inventory getInventory(){
         return this.inv;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+    
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     
     @Override

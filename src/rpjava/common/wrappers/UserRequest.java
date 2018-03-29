@@ -46,7 +46,8 @@ public class UserRequest {
     public enum UserRequestOn {
         FRIENDS,
         NPCS,
-        MAPS
+        MAPS,
+        CHARSET
     }
     
     // Type of action to the server
