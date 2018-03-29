@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class Inventory {
     
-    private Map<Item,Integer> items;
+    private java.util.Map<Item,Integer> items;
     private int size;
     
     public Inventory(int size){

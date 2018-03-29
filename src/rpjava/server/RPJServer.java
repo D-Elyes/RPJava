@@ -79,7 +79,7 @@ public class RPJServer extends AbstractServer {
                 try{
                     Object[] data = (Object[])query.getData();
                     if (accountDAO.signUp((Account)data[0], (User)data[1])){
-                        client.sendToClient((User)data[1]);
+                        client.sendToClient(accountDAO.signIn((Account)data[0]));
                     } else {
                         client.sendToClient(new InvalidAccountException("Cannot create an account with this name"));
                     }
