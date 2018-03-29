@@ -46,26 +46,15 @@ public class LoginUIController implements Initializable,UIIF {
     private RPJavaMainApp mainApp;
     
     private RPJClient client;
+    private User user;
     
     //The constructor
-    public LoginUIController(String host, int port)
+    public LoginUIController(RPJClient client)
     {
-        signUpLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-               handleSignUp();
-            }
-        });
+        
        
-        try
-        {
-            client = new RPJClient(host, port, this);
-             client.openConnection();
-        }
-        catch(IOException e)
-        {
-               System.out.println(e.getMessage());
-        }
+           this.client = client;
+        
         
         
     }
@@ -92,7 +81,10 @@ public class LoginUIController implements Initializable,UIIF {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
+    
+    
 
     
     /**
@@ -119,6 +111,9 @@ public class LoginUIController implements Initializable,UIIF {
         try
         {   
             client.sendToServer(accQuery);
+            
+            mainApp.showManiMenuUI(user);
+
         }
         catch(IOException e)
         {
@@ -134,16 +129,26 @@ public class LoginUIController implements Initializable,UIIF {
     }
     
     @FXML
-    public void handleSignUp()
+    public void handleSignUpLabel()
     {
-        SignUpUIController signUpUiController = new SignUpUIController(client);
-        mainApp.showSignUpUI(signUpUiController);
         
+       
+        mainApp.showSignUpUI();
+        
+    }
+    
+    @FXML
+    public void handleForgetPassword()
+    {
+        mainApp.showRecoveryPasswordUI();
     }
     
     
     public void receiveUserData(User u) {
-        System.out.println(u.getNickName());
+        if(u != null)
+        {
+            this.user = u;
+        }
     }
 
     public void invalidLogin(InvalidAccountException e) {
@@ -151,8 +156,11 @@ public class LoginUIController implements Initializable,UIIF {
     }
 
     public void connectionException(Exception e) {
+        System.out.println("Error Connection");
         System.out.println(e.getMessage());
     }
+
+    
     
     @Override
     public void handleMessage(Object msg) {

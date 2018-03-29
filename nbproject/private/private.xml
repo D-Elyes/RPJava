@@ -3,15 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/SignUpUI.fxml</file>
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/RPJavaMainApp.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/MainMenuUI.fxml</file>
+            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/MainMenuUIController.java</file>
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/LoginUIController.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/common/Account.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/lib/ocsf/client/AbstractClient.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/RecoveryPasswordUI.fxml</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/DerbyJavaDb/AccountDaoDerby.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/lib/ocsf/server/ConnectionToClient.java</file>
+            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/DerbyJavaDb/DbConnection.java</file>
+            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/SignUpUIController.java</file>
+            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/RecoveryPasswordUIController.java</file>
+            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/server/RPJServer.java</file>
         </group>
     </open-files>
 </project-private>

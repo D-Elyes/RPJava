@@ -12,10 +12,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import rpjava.client.RPJClient;
+import rpjava.common.User;
 
 /**
  *
@@ -23,19 +26,32 @@ import javafx.stage.Stage;
  */
 public class RPJavaMainApp extends Application {
     
-    private String host = "localhost";
-    private int port = 12345;
+    final private  String host = "localhost";
+    final private int port = 12345;
+    private RPJClient client;
+    
     
     private Stage primaryStage;
     private BorderPane rootLayout;
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage)  {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("RPJava");
         this.primaryStage.setResizable(false);
         
-        initRootLayout();
+        client = new RPJClient(host, port);
+        try
+        {
+              client.openConnection();
+        
+        }
+        catch(IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
+      
+       // initRootLayout();
         
         showLoginUI();
        
@@ -44,7 +60,7 @@ public class RPJavaMainApp extends Application {
     /**
      * Initilize the root layout
      */
-    public void initRootLayout()
+  /* public void initRootLayout()
     {
         try
         {
@@ -68,7 +84,7 @@ public class RPJavaMainApp extends Application {
         {
             System.out.println(e.getMessage());
         }
-    }
+    }*/
     
     
     /**
@@ -80,13 +96,19 @@ public class RPJavaMainApp extends Application {
         {
              
             FXMLLoader loader = new FXMLLoader();
-            LoginUIController controller =  new LoginUIController(host, port);
+            
+            LoginUIController controller =  new LoginUIController(client);
+            
             loader.setLocation(RPJavaMainApp.class.getResource("LoginUI.fxml"));
             loader.setController(controller);
             AnchorPane loginUI = (AnchorPane) loader.load();
             
+            client.setUI(controller);
             
-            rootLayout.setCenter(loginUI);
+            
+          
+            
+           // rootLayout.setCenter(loginUI);
             
             
             //give the controller access to the main app
@@ -99,6 +121,10 @@ public class RPJavaMainApp extends Application {
 
             //loader.setController(controller);
             controller.setRPJavaMainApp(this);
+            
+            Scene logInScene = new Scene(loginUI);
+            primaryStage.setScene(logInScene);
+            primaryStage.show();
             
            
         }
@@ -114,37 +140,25 @@ public class RPJavaMainApp extends Application {
         }
     }
     
-    public void showSignUpUI(SignUpUIController controller)
+    public void showSignUpUI()
     {
          try
         {
              
             FXMLLoader loader = new FXMLLoader();
-            
+           
+            SignUpUIController controller = new SignUpUIController(client);
             loader.setLocation(RPJavaMainApp.class.getResource("SignUpUI.fxml"));
             loader.setController(controller);
             AnchorPane signUpUI = (AnchorPane) loader.load();
-            
-           // primaryStage.setScene(value);
-           // rootLayout.setCenter(signUpUI);
-            
-            
-            //give the controller access to the main app
-            
-           
-            //LoginUIController controller = loader.getController();
-            
-           // controller.initConnectioToServer(host,port);
-            
-
-            //loader.setController(controller);
-            controller.setRPJavaMainApp(this);
+            client.setUI(controller);
+           controller.setRPJavaMainApp(this);
             
             Scene signUpScene = new Scene(signUpUI);
             primaryStage.setScene(signUpScene);
             primaryStage.show();
             
-           
+            
         }
         catch(IOException e)
         {
@@ -157,6 +171,65 @@ public class RPJavaMainApp extends Application {
         }
     }
     
+    public void showRecoveryPasswordUI()
+    {
+         try
+        {
+             RecoveryPasswordUIController controller = new RecoveryPasswordUIController(client);
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(RPJavaMainApp.class.getResource("RecoveryPasswordUI.fxml"));
+            loader.setController(controller);
+            AnchorPane recoveryPassui = (AnchorPane) loader.load();
+            
+           controller.setRPJavaMainApp(this);
+            
+            Scene recoveryPassScene = new Scene(recoveryPassui);
+            primaryStage.setScene(recoveryPassScene);
+            primaryStage.show();
+            
+           
+        }
+        catch(IOException e)
+        {
+           // System.out.println(e.getMessage());
+            e.printStackTrace();   
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void showManiMenuUI(User user)
+    {
+        try
+        {
+             MainMenuUIController controller = new MainMenuUIController(client,user);
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(RPJavaMainApp.class.getResource("MainMenuUI.fxml"));
+            loader.setController(controller);
+            AnchorPane recoveryPassui = (AnchorPane) loader.load();
+            
+           controller.setRPJavaMainApp(this);
+            
+            Scene mainMenuScene = new Scene(recoveryPassui);
+            primaryStage.setScene(mainMenuScene);
+            primaryStage.show();
+            
+           
+        }
+        catch(IOException e)
+        {
+           // System.out.println(e.getMessage());
+            e.printStackTrace();   
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
     /**
      * Return the main stage
      */

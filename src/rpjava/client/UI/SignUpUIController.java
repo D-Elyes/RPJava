@@ -11,13 +11,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import rpjava.client.RPJClient;
+import rpjava.client.UIIF;
+import rpjava.common.User;
+import rpjava.common.exception.InvalidAccountException;
 
 /**
  * FXML Controller class
  *
  * @author doude
  */
-public class SignUpUIController implements Initializable {
+public class SignUpUIController implements Initializable, UIIF {
     
     @FXML
     private TextField loginTF;
@@ -36,6 +39,7 @@ public class SignUpUIController implements Initializable {
     
     //client responsible of the connection to the server
     private RPJClient client;
+    private String message;
     
     
     public SignUpUIController(RPJClient client)
@@ -64,6 +68,33 @@ public class SignUpUIController implements Initializable {
         // TODO
         
     }    
+
+    @Override
+    public void handleMessage(Object msg) {
+         if(msg instanceof InvalidAccountException)
+         {
+             message = "Login already used";
+         }
+           
+        if(msg instanceof Exception)
+        {
+           message = "There was an error with the server";
+        } 
+        else if(msg instanceof User)
+        {
+            message = "Aaccount created succussfully";
+        }
+    }
+    
+    
+    @FXML
+    public void homeButton()
+    {
+        
+        mainApp.showLoginUI();
+    }
+    
+    
     
     
     
