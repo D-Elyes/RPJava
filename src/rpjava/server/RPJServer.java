@@ -5,6 +5,7 @@
  */
 package rpjava.server;
 
+import DerbyJavaDb.FactoryDaoDerby;
 import rpjava.server.dao.*;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,11 +24,13 @@ public class RPJServer extends AbstractServer {
 
     AccountDAO accountDAO;
     NpcDAO npcDAO;
+    MapDAO mapDAO;
     
     public RPJServer(int port, AbstractFactoryDao daoGenerator) {
         super(port);
         this.accountDAO = daoGenerator.createAccountDao();
         this.npcDAO = daoGenerator.createNpcDao();
+        this.mapDAO = daoGenerator.createMapDao();
     }
 
     @Override

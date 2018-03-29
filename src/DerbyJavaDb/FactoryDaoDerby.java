@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rpjava.server;
+package DerbyJavaDb;
 
 import rpjava.server.dao.*;
 import DerbyJavaDb.*;
+import rpjava.server.AbstractFactoryDao;
 
 /**
  *
@@ -24,4 +25,8 @@ public class FactoryDaoDerby implements AbstractFactoryDao {
         return new NpcDaoDerby();
     }
     
+    @Override
+    public MapDAO createMapDao(){
+        return null;
+    }
 }
