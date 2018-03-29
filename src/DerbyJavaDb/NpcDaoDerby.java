@@ -57,6 +57,10 @@ public class NpcDaoDerby implements NpcDAO {
     @Override
     public boolean addNpc(int userID, NPC npc) throws SQLException {
         
+        String reqTest = "SELECT * FROM USERS WHERE IDUSER = " + userID + ";";
+        ResultSet res = con.createStatement().executeQuery(reqTest);
+        if(!res.next()){ return false; }
+         
         String req = "INSERT INTO GENERICNPC (USERID, RACE, NAME, ISAGRESSIVE, ISBOSS, DEFAULTLEVEL, SPEECH) VALUES ("
                 + userID + ","
                 + "'" + npc.getRace().getClassName() + "',"
