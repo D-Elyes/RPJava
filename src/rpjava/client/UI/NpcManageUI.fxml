@@ -48,7 +48,7 @@
    <left>
       <TableView fx:id="raceListTableView" prefHeight="675.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="75.0" text="Race" />
+          <TableColumn fx:id="raceName" prefWidth="75.0" text="Race" />
         </columns>
       </TableView>
    </left>
