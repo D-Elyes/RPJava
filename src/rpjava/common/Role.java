@@ -6,6 +6,7 @@
 package rpjava.common;
 
 import java.util.*;
+import rpjava.common.roles.*;
 
 /**
  * This class gathers all informations about roles
@@ -37,6 +38,14 @@ public abstract class Role {
         } catch (Exception ex) {
             return new DefaultRole();
         }
+    }
+    
+    public static Collection<Role> getAllRoles(){
+        Collection<Role> col = new HashSet<>();
+        col.add(new Ranger());
+        col.add(new Warrior());
+        col.add(new Wizzard());
+        return col;
     }
     
 // CONSTRUCTOR -----------------------------------------------------------------

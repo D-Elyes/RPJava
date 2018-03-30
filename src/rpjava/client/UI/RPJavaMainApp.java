@@ -40,11 +40,7 @@ public class RPJavaMainApp extends Application {
     * Property that will contains the primary stage of the main application 
     */
     private Stage primaryStage;
-    
-    /**
-    * Property that will contains the root layout of the main application 
-    */
-    private BorderPane rootLayout;
+
 
 // INSTANCE METHODS ------------------------------------------------------------
     
@@ -75,16 +71,8 @@ public class RPJavaMainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
            
             loader.setLocation(RPJavaMainApp.class.getResource("RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
             
             primaryStage.show();
-        }
-        catch(IOException e)
-        {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
         }
         catch(Exception e)
         {
@@ -108,7 +96,6 @@ public class RPJavaMainApp extends Application {
             AnchorPane loginUI = (AnchorPane) loader.load();
             
             
-            rootLayout.setCenter(loginUI);
             
             
             //give the controller access to the main app
