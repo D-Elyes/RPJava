@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,17 +19,39 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- *
- * @author doude
+ * This class is the main RPJava mais class of the app
+ * @author RPJavaTeam
  */
 public class RPJavaMainApp extends Application {
+   
+// INSTANCE PROPERTIES ---------------------------------------------------------
     
+    /**
+    * Property that contains the host 
+    */
     private String host = "localhost";
+    
+    /**
+    * Property that contains the port 
+    */
     private int port = 12345;
     
+     /**
+    * Property that will contains the primary stage of the main application 
+    */
     private Stage primaryStage;
-    private BorderPane rootLayout;
     
+    /**
+    * Property that will contains the root layout of the main application 
+    */
+    private BorderPane rootLayout;
+
+// INSTANCE METHODS ------------------------------------------------------------
+    
+    /**
+    * This is the starting method call at the running time
+    * @param primaryStage The first windows to display
+    */
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -42,7 +65,7 @@ public class RPJavaMainApp extends Application {
     }
     
     /**
-     * Initilize the root layout
+     * This method initilizes the root layout
      */
     public void initRootLayout()
     {
@@ -71,7 +94,7 @@ public class RPJavaMainApp extends Application {
     
     
     /**
-     * Show the login UI inside the rootLayout
+     * This method shows the login UI inside the root layout
      */
     public void showLoginUI()
     {
@@ -113,15 +136,16 @@ public class RPJavaMainApp extends Application {
     }
     
     /**
-     * Return the main stage
-     */
-    public Stage getStage()
+     * This getter return the main stage
+     * @return Stage The main stage
+     */    public Stage getStage()
     {
         return primaryStage;
     }
     
 
     /**
+     * Main méthod launching the class
      * @param args the command line arguments
      */
     public static void main(String[] args) {
