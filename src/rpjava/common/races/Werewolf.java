@@ -18,7 +18,7 @@ public class Werewolf extends Race {
     }
     
     @Override
-    public String getRoleName() {
+    public String getRaceName() {
         return this.getClass().getSimpleName();
     }
 
