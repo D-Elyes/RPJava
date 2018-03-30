@@ -68,6 +68,7 @@ public abstract class Character {
     /**
     * This abstract method gets the maximum value of health of the character
     * @return int The maximum value of health of the character
+    * @see NPC#getMaxHp() 
     */
     public abstract int getMaxHp();
     
