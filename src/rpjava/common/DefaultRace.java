@@ -18,7 +18,7 @@ public class DefaultRace extends Race {
     }
     
     @Override
-    public String getRoleName() {
+    public String getRaceName() {
         return "Default race";
     }
 

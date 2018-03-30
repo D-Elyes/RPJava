@@ -82,7 +82,7 @@ public abstract class Race {
     * This abstract method gets the role name of the race
     * @return int The role name of the race 
     */
-    public abstract String getRoleName();
+    public abstract String getRaceName();
     
     /**
     * This abstract method gets the maximum value of health of the race linked to its level
