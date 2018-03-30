@@ -46,7 +46,6 @@ public class RPJServer extends AbstractServer {
                     break;
                 }
                 case MAPS:{
-                    handleCharSetQuery(request.getUserID(), request.getAction(), request.getData(), client);
                     break;
                 }
                 case NPCS:{
@@ -54,6 +53,7 @@ public class RPJServer extends AbstractServer {
                     break;
                 }
                 case CHARSET:{
+                    handleCharSetQuery(request.getUserID(), request.getAction(), request.getData(), client);
                     break;
                 }
                 default:{
