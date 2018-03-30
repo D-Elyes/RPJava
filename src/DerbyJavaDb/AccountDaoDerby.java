@@ -83,20 +83,26 @@ public class AccountDaoDerby implements AccountDAO {
      */ 
     @Override
     public Boolean signUp(Account account, User user) throws SQLException {
-        String checkExistingAccount = "SELECT * FROM ACCOUNT WHERE LOGIN = '" + account.getLogin() + "';";
-        ResultSet existing = con.createStatement().executeQuery(checkExistingAccount);
-        if (!existing.next()) { return false; }
         
-        String addAccount = "INSERT INTO ACCOUNT (LOGIN,PASSWORD) VALUES ('"
+        String checkExistingAccount = "SELECT * FROM ACCOUNT WHERE LOGIN = '" + account.getLogin() + "'";
+        ResultSet existing = con.createStatement().executeQuery(checkExistingAccount);
+        if (existing.next()) { return false; }
+        
+       
+        
+        String addAccount = "INSERT INTO ACCOUNT(LOGIN,PASSWORD) VALUES ('"
                 + account.getLogin() + "','"
-                + account.getPassword() + "');";
-        con.createStatement().execute(addAccount);
+                + account.getPassword() + "')";
+        con.createStatement().executeUpdate(addAccount);
+        
+      
         
         String addUser = "INSERT INTO USERS (NICKNAME, AGE, IDACCOUNT) VALUES ('"
                 + user.getNickName() + "',"
                 + user.getAge()
-                + ",(SELECT IDACCOUNT FROM ACCOUNT WHERE LOGIN = '" + account.getLogin() + "'));";
-        con.createStatement().execute(addUser);
+                + ",(SELECT IDACCOUNT FROM ACCOUNT WHERE LOGIN = '" + account.getLogin() + "'))";
+        con.createStatement().executeUpdate(addUser);
+       
         return true;
     }
     

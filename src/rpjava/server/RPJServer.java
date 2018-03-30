@@ -134,7 +134,10 @@ public class RPJServer extends AbstractServer {
                     } else {
                         client.sendToClient(new InvalidAccountException("Cannot create an account with this name"));
                     }
-                } catch (Exception e){}
+                } catch (Exception e)
+                {
+                    System.out.println(e.getMessage());
+                }
                 break;
             }
             case UPDATE: {

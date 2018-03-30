@@ -8,11 +8,21 @@ package rpjava.client.UI;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import rpjava.client.UIIF;
 import rpjava.client.RPJClient;
 import rpjava.common.Account;
@@ -33,34 +43,40 @@ public class LoginUIController implements Initializable,UIIF {
     /**
     * Property FXML that contains the login textfield
     */
+    @FXML
     private TextField loginTextField;
     
     /**
     * Property FXML that contains the password textfield
     */
+    @FXML
     private TextField passwordTextField;
     
     
+
     /**
     * Property FXML that contains the signup label
     */
+    @FXML
     private Label SignUpLabel;
     
     /**
     * Property FXML that contains the forget password textfield
     */
+    @FXML
     private Label forgetPassLabel;
     
     /**
     * Property that contains the reference to the main application
     */
+    
     private RPJavaMainApp mainApp;
     
     /**
     * Property that contains the reference to the linked client
     */
     private RPJClient client;
-
+    //The constructor
 // CONSTRUCTOR -----------------------------------------------------------------
     
     /**
@@ -68,18 +84,13 @@ public class LoginUIController implements Initializable,UIIF {
     * @param host The host which will hold the connection
     * @param port The port the connection has to listen
     */
-    public LoginUIController(String host, int port)
+    public LoginUIController(RPJClient client)
+
     {
+        
        
-        try
-        {
-            client = new RPJClient(host, port, this);
-             client.openConnection();
-        }
-        catch(IOException e)
-        {
-               System.out.println(e.getMessage());
-        }
+           this.client = client;
+        
         
         
     }
@@ -108,7 +119,10 @@ public class LoginUIController implements Initializable,UIIF {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
+    
+    
 
     
     /**
@@ -129,12 +143,21 @@ public class LoginUIController implements Initializable,UIIF {
     @FXML
     private void handleSingIn()
     {
-        
+        System.out.println("****************************");
         Account acc = new Account(loginTextField.getText(), passwordTextField.getText());
         AccountQuery accQuery = new AccountQuery(acc, AccountQuery.QueryType.SIGNIN);
-        try
-        {   
-            client.sendToServer(accQuery);
+        System.out.println("****************************");
+         try
+        { 
+            
+                 client.sendToServer(accQuery);
+                     
+            
+               
+          
+            if(mainApp.getUser() != null)
+                mainApp.showManiMenuUI();
+
         }
         catch(IOException e)
         {
@@ -145,24 +168,44 @@ public class LoginUIController implements Initializable,UIIF {
           
             System.out.println(e.getMessage());
         }
+         
+    }
+    
+    @FXML
+    public void handleSignUpLabel()
+    {
         
+        mainApp.showSignUpUI();
         
     }
     
-    /**
-    * This method displays the nickname of the connecting user.
-    * @param u The connecting user
-    */
-    public void receiveUserData(User u) {
-        System.out.println(u.getNickName());
+    @FXML
+    public void handleForgetPassword()
+    {
+        mainApp.showRecoveryPasswordUI();
     }
-
+    
+    
+    public  void  receiveUserData(User u) {
+        
+            mainApp.setUser(u);
+            //notifyAll();
+    }
      /**
     * This method displays an error message when the login is invalid.
     * @param e An invalid account error
     */
     public void invalidLogin(InvalidAccountException e) {
-        System.out.println("Invalid Login");
+       System.out.println("Login Invalid");
+        /*final Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.initOwner(mainApp.getStage());
+                VBox dialogVbox = new VBox(20);
+                dialogVbox.getChildren().add(new Text("Invalid Account"));
+                Scene dialogScene = new Scene(dialogVbox, 300, 200);
+                dialog.setScene(dialogScene);
+                dialog.show();    */
+
     }
 
      /**
@@ -170,8 +213,25 @@ public class LoginUIController implements Initializable,UIIF {
     * @param e An exception
     */
     public void connectionException(Exception e) {
-        System.out.println(e.getMessage());
+        /* final Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.initOwner(mainApp.getStage());
+                VBox dialogVbox = new VBox(20);
+                dialogVbox.getChildren().add(new Text("server Error !!!!!!!!!"));
+                Scene dialogScene = new Scene(dialogVbox, 300, 200);
+                dialog.setScene(dialogScene);
+                dialog.show();    
+                mainApp.showLoginUI();*/
+        System.out.println("Error Connection");
+        //System.out.println(e.getMessage());
     }
+    
+    public void closeButton()
+    {
+        System.exit(0);
+    }
+
+    
     
      /**
     * This method tells to the current class how to treat a receiving message.

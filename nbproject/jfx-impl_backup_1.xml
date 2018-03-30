@@ -1231,11 +1231,23 @@
             </script>
             <echo message="run.and.lib.classpath = ${run.and.lib.classpath}" level="verbose"/>
             <delete dir="${dist.dir}${file.separator}lib" includeEmptyDirs="true" quiet="true"/>
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <copy todir="${dist.dir}${file.separator}lib" flatten="true" preservelastmodified="true" overwrite="true">
+=======
+            <!--<copy todir="${dist.dir}${file.separator}lib" flatten="true" preservelastmodified="true" overwrite="true">
+>>>>>>> cdeaffe521207224f5e7e4a6faaf89b2fe9bb8c9
+                <path>
+                    <pathelement path="${run.and.lib.classpath}"/>
+                </path>
+            </copy>
+=======
             <!--<copy todir="${dist.dir}${file.separator}lib" flatten="true" preservelastmodified="true" overwrite="true">
                 <path>
                     <pathelement path="${run.and.lib.classpath}"/>
                 </path>
             </copy>-->
+>>>>>>> 6e928da212e6a42e357f1290491873993255fafd
         </sequential>
     </macrodef>
     
