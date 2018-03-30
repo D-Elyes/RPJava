@@ -7,7 +7,8 @@ package rpjava.common;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import rpjava.common.races.DefaultRace;
+import java.util.*;
+import rpjava.common.races.*;
 
 /**
  *
@@ -26,6 +27,14 @@ public abstract class Race {
         } catch (Exception ex) {
             return new DefaultRace();
         }
+    }
+    
+    public static Collection<Race> getAllRaces(){
+        Collection<Race> col = new HashSet<>();
+        col.add(new Griffin());
+        col.add(new Human());
+        col.add(new Werewolf());
+        return col;
     }
     
     protected Race(int baseHP, int baseMana, float baseAttack, float baseDefence){

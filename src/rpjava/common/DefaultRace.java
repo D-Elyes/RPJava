@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rpjava.common.races;
+package rpjava.common;
 
 import rpjava.common.Race;
 

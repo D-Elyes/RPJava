@@ -5,7 +5,7 @@
  */
 package rpjava.common;
 
-import rpjava.common.roles.DefaultRole;
+import java.util.*;
 
 /**
  *
