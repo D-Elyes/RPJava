@@ -3,12 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/RPJavaMainApp.java</file>
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/MainMenuUIController.java</file>
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/RPJClient.java</file>
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/LoginUIController.java</file>
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/common/wrappers/AccountQuery.java</file>
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/SignUpUIController.java</file>
+=======
+            <file>file:/C:/Users/Matthieu/Documents/Git/RPJava/RPJava/src/rpjava/common/Room.java</file>
+            <file>file:/C:/Users/Matthieu/Documents/Git/RPJava/RPJava/src/rpjava/common/Role.java</file>
+            <file>file:/C:/Users/Matthieu/Documents/Git/RPJava/RPJava/src/rpjava/common/NPC.java</file>
+            <file>file:/C:/Users/Matthieu/Documents/Git/RPJava/RPJava/src/rpjava/common/User.java</file>
+            <file>file:/C:/Users/Matthieu/Documents/Git/RPJava/RPJava/src/rpjava/common/Player.java</file>
+            <file>file:/C:/Users/Matthieu/Documents/Git/RPJava/RPJava/src/rpjava/common/Race.java</file>
+>>>>>>> 6e928da212e6a42e357f1290491873993255fafd
         </group>
     </open-files>
 </project-private>

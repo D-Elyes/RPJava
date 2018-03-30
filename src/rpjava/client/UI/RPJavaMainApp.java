@@ -8,39 +8,58 @@ package rpjava.client.UI;
 
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import rpjava.client.RPJClient;
-import rpjava.common.NPC;
-import rpjava.common.Race;
 import rpjava.common.User;
 
 /**
- *
- * @author doude
+ * This class is the main RPJava mais class of the app
+ * @author RPJavaTeam
  */
 public class RPJavaMainApp extends Application {
+   
+// INSTANCE PROPERTIES ---------------------------------------------------------
     
-    final private  String host = "localhost";
-    final private int port = 12345;
+    /**
+    * Property that contains the host 
+    */
+    private String host = "localhost";
+    
     private RPJClient client;
     private User user;
     
+    /**
+    * Property that contains the port 
+    */
+    private int port = 12345;
     
+     /**
+    * Property that will contains the primary stage of the main application 
+    */
     private Stage primaryStage;
     
-    private ObservableList<Race> raceData = FXCollections.observableArrayList();
-    private ObservableList<NPC> npcData = FXCollections.observableArrayList();
+
+// INSTANCE METHODS ------------------------------------------------------------
     
+    /**
+    * This is the starting method call at the running time
+    * @param primaryStage The first windows to display
+    */
     @Override
-    public void start(Stage primaryStage)  {
+    public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("RPJava");
         this.primaryStage.setResizable(false);
+        
         user = null;
         client = new RPJClient(host, port);
         try
@@ -52,14 +71,10 @@ public class RPJavaMainApp extends Application {
         {
             System.out.println(e.getMessage());
         }
-      
-       // initRootLayout();
         
         showLoginUI();
        
     }
-    
-   
     
     /**
      * Show the login UI inside the rootLayout
@@ -92,10 +107,8 @@ public class RPJavaMainApp extends Application {
             System.out.println("In the login UI init");
             System.out.println(e.getMessage());
             e.printStackTrace();   
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
+
+    
         }
     }
     
@@ -176,8 +189,7 @@ public class RPJavaMainApp extends Application {
             Scene mainMenuScene = new Scene(mainMenu);
             primaryStage.setScene(mainMenuScene);
             primaryStage.show();
-            
-           
+
         }
         catch(IOException e)
         {
@@ -213,6 +225,7 @@ public class RPJavaMainApp extends Application {
         catch(IOException e)
         {
            // System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
             e.printStackTrace();   
         }
         catch(Exception e)
@@ -220,16 +233,22 @@ public class RPJavaMainApp extends Application {
             System.out.println(e.getMessage());
         }
     }
+
+   
     /**
-     * Return the main stage
-     */
-    public Stage getStage()
+     * This getter return the main stage
+     * @return Stage The main stage
+     */    public Stage getStage()
     {
         return primaryStage;
     }
     
 
     /**
+<<<<<<< HEAD
+=======
+     * Main méthod launching the class
+>>>>>>> 6e928da212e6a42e357f1290491873993255fafd
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -244,6 +263,6 @@ public class RPJavaMainApp extends Application {
         this.user = user;
     }
     
-    
+
     
 }

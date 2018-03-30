@@ -7,6 +7,8 @@ package rpjava.client.UI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -44,10 +46,13 @@ public class NpcManageUIController implements Initializable {
    private TextField nameTF;
    
    @FXML
-   private ImageView image;
+   private ImageView imageNpc;
    
    private RPJavaMainApp mainApp;
    private RPJClient client;
+   
+    private ObservableList<Race> raceData = FXCollections.observableArrayList();
+    private ObservableList<NPC> npcData = FXCollections.observableArrayList();
     
     
     public NpcManageUIController(RPJClient client)

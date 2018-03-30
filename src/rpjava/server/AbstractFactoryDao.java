@@ -16,4 +16,5 @@ public interface AbstractFactoryDao {
     public AccountDAO createAccountDao();
     public NpcDAO createNpcDao();
     public MapDAO createMapDao();
+    public CharacterDAO createCharacterDAO();
 }

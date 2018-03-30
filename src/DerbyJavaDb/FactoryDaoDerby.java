@@ -27,6 +27,11 @@ public class FactoryDaoDerby implements AbstractFactoryDao {
     
     @Override
     public MapDAO createMapDao(){
-        return null;
+        return new MapDaoDerby();
+    }
+    
+    @Override
+    public CharacterDAO createCharacterDAO(){
+        return new CharacterDaoDerby();
     }
 }

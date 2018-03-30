@@ -25,12 +25,14 @@ public class RPJServer extends AbstractServer {
     AccountDAO accountDAO;
     NpcDAO npcDAO;
     MapDAO mapDAO;
+    CharacterDAO characterDAO;
     
     public RPJServer(int port, AbstractFactoryDao daoGenerator) {
         super(port);
         this.accountDAO = daoGenerator.createAccountDao();
         this.npcDAO = daoGenerator.createNpcDao();
         this.mapDAO = daoGenerator.createMapDao();
+        this.characterDAO = daoGenerator.createCharacterDAO();
     }
 
     @Override
@@ -50,12 +52,61 @@ public class RPJServer extends AbstractServer {
                     handleNpcQuery(request.getUserID(), request.getAction(), request.getData(), client);
                     break;
                 }
+                case CHARSET:{
+                    handleCharSetQuery(request.getUserID(), request.getAction(), request.getData(), client);
+                    break;
+                }
                 default:{
                     try {
                         client.sendToClient(new InvalidRequestException("Data type not known"));
                     } catch (IOException ex) {
                         Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                }
+            }
+        }
+    }
+    
+    protected void handleCharSetQuery(int userID, UserRequest.UserRequestAction action, Object data, ConnectionToClient client){
+        switch(action){
+            case GET:{
+                try {
+                    Player[] players = characterDAO.getCharacters(userID);
+                    client.sendToClient(new UserResult(players, UserRequest.UserRequestOn.CHARSET));
+                } catch (SQLException ex) {
+                    Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException e){}
+                break;
+            }
+            case SAVE:{
+                try {
+                    characterDAO.addCharacter(userID, (Player)data);
+                } catch (SQLException ex) {
+                    Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            }
+            case UPDATE:{
+                try {
+                    this.characterDAO.updateCharacter(userID, ((Player[])data)[0], ((Player[])data)[1]);
+                } catch (SQLException ex) {
+                    Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            }
+            case DELETE:{
+                try {
+                    this.characterDAO.deleteCharacter(userID, (Player)data);
+                } catch (SQLException ex) {
+                    Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            }
+            default:{
+                try {
+                    client.sendToClient(new InvalidRequestException("Verb " + action.toString() + " does not exist"));
+                } catch (IOException ex) {
+                    Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -124,7 +175,7 @@ public class RPJServer extends AbstractServer {
             }
             case SAVE:{
                 try {
-                    if (this.npcDAO.addNpc(userID, (NPC)data));
+                    this.npcDAO.addNpc(userID, (NPC)data);
                 } catch (SQLException ex) {
                     Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -147,11 +198,11 @@ public class RPJServer extends AbstractServer {
                 break;
             }
             default:{
-            try {
-                client.sendToClient(new InvalidRequestException("Verb " + action.toString() + " does not exist"));
-            } catch (IOException ex) {
-                Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    client.sendToClient(new InvalidRequestException("Verb " + action.toString() + " does not exist"));
+                } catch (IOException ex) {
+                    Logger.getLogger(RPJServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
