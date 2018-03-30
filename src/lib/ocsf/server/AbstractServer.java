@@ -29,6 +29,7 @@ import java.io.*;
 * @author Dr Timothy C. Lethbridge
 * @author Fran&ccedil;ois B&eacute;langer
 * @author Paul Holden
+* @author RPJavaTeam
 * @version February 2001 (2.12)
 * @see ocsf.server.ConnectionToClient
 */

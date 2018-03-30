@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,17 +8,15 @@ package rpjava.client.UI;
 
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import rpjava.client.RPJClient;
+import rpjava.common.NPC;
+import rpjava.common.Race;
 import rpjava.common.User;
 
 /**
@@ -29,17 +28,20 @@ public class RPJavaMainApp extends Application {
     final private  String host = "localhost";
     final private int port = 12345;
     private RPJClient client;
+    private User user;
     
     
     private Stage primaryStage;
-    private BorderPane rootLayout;
+    
+    private ObservableList<Race> raceData = FXCollections.observableArrayList();
+    private ObservableList<NPC> npcData = FXCollections.observableArrayList();
     
     @Override
     public void start(Stage primaryStage)  {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("RPJava");
         this.primaryStage.setResizable(false);
-        
+        user = null;
         client = new RPJClient(host, port);
         try
         {
@@ -57,35 +59,7 @@ public class RPJavaMainApp extends Application {
        
     }
     
-    /**
-     * Initilize the root layout
-     */
-  /* public void initRootLayout()
-    {
-        try
-        {
-            //load from fxml file
-            FXMLLoader loader = new FXMLLoader();
-           
-            loader.setLocation(RPJavaMainApp.class.getResource("RootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
-            
-            primaryStage.show();
-        }
-        catch(IOException e)
-        {
-            
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-    }*/
-    
+   
     
     /**
      * Show the login UI inside the rootLayout
@@ -103,24 +77,9 @@ public class RPJavaMainApp extends Application {
             loader.setController(controller);
             AnchorPane loginUI = (AnchorPane) loader.load();
             
-            client.setUI(controller);
-            
-            
-          
-            
-           // rootLayout.setCenter(loginUI);
-            
-            
-            //give the controller access to the main app
-            
+            client.setUI(controller);       
            
-            //LoginUIController controller = loader.getController();
-            
-           // controller.initConnectioToServer(host,port);
-            
-
-            //loader.setController(controller);
-            controller.setRPJavaMainApp(this);
+           controller.setRPJavaMainApp(this);
             
             Scene logInScene = new Scene(loginUI);
             primaryStage.setScene(logInScene);
@@ -201,21 +160,52 @@ public class RPJavaMainApp extends Application {
         }
     }
     
-    public void showManiMenuUI(User user)
+    public void showManiMenuUI()
     {
         try
         {
-             MainMenuUIController controller = new MainMenuUIController(client,user);
+             MainMenuUIController controller = new MainMenuUIController(client);
             FXMLLoader loader = new FXMLLoader();
             
             loader.setLocation(RPJavaMainApp.class.getResource("MainMenuUI.fxml"));
             loader.setController(controller);
-            AnchorPane recoveryPassui = (AnchorPane) loader.load();
+            AnchorPane mainMenu = (AnchorPane) loader.load();
             
            controller.setRPJavaMainApp(this);
             
-            Scene mainMenuScene = new Scene(recoveryPassui);
+            Scene mainMenuScene = new Scene(mainMenu);
             primaryStage.setScene(mainMenuScene);
+            primaryStage.show();
+            
+           
+        }
+        catch(IOException e)
+        {
+           // System.out.println(e.getMessage());
+            e.printStackTrace();   
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+    public void showNpcManageUI()
+    {
+         try
+        {
+             NpcManageUIController controller = new NpcManageUIController(client);
+            FXMLLoader loader = new FXMLLoader();
+            
+            loader.setLocation(RPJavaMainApp.class.getResource("NpcManageUI.fxml"));
+            loader.setController(controller);
+            AnchorPane npcUI = (AnchorPane) loader.load();
+            
+           controller.setRPJavaMainApp(this);
+            
+            Scene npcScene = new Scene(npcUI);
+            primaryStage.setScene(npcScene);
             primaryStage.show();
             
            
@@ -245,5 +235,15 @@ public class RPJavaMainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    
     
 }

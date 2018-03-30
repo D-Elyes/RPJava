@@ -9,7 +9,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import rpjava.client.RPJClient;
-import rpjava.common.User;
 
 /**
  * FXML Controller class
@@ -20,13 +19,11 @@ public class MainMenuUIController implements Initializable {
 
     private RPJClient client;
     private RPJavaMainApp mainApp;
-    private User user;
     
     
-    public MainMenuUIController(RPJClient client,User user)
+    public MainMenuUIController(RPJClient client)
     {
         this.client = client;
-        this.user = user;
     }
     /**
      * Initializes the controller class.
@@ -43,6 +40,17 @@ public class MainMenuUIController implements Initializable {
     {
         this.mainApp = mainApp;
         
-        
     }
+     
+     public void logOffButton()
+     {
+         mainApp.setUser(null);
+         mainApp.showLoginUI();
+     }
+     
+     public void npcButton()
+     {
+         mainApp.showNpcManageUI();
+     
+     }
 }

@@ -8,13 +8,21 @@ package rpjava.client.UI;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import rpjava.client.UIIF;
 import rpjava.client.RPJClient;
 import rpjava.common.Account;
@@ -46,8 +54,6 @@ public class LoginUIController implements Initializable,UIIF {
     private RPJavaMainApp mainApp;
     
     private RPJClient client;
-    private User user;
-    
     //The constructor
     public LoginUIController(RPJClient client)
     {
@@ -103,16 +109,23 @@ public class LoginUIController implements Initializable,UIIF {
      */
     
     @FXML
-    private void handleSingIn()
+    private  void handleSingIn()
     {
         
         Account acc = new Account(loginTextField.getText(), passwordTextField.getText());
         AccountQuery accQuery = new AccountQuery(acc, AccountQuery.QueryType.SIGNIN);
-        try
-        {   
-            client.sendToServer(accQuery);
+         try
+        { 
             
-            mainApp.showManiMenuUI(user);
+                        client.sendToServer(accQuery);
+                       for (long i = 0; i < 1e5; i++) {
+                
+            }
+            
+               
+          
+            if(mainApp.getUser() != null)
+                mainApp.showManiMenuUI();
 
         }
         catch(IOException e)
@@ -125,6 +138,8 @@ public class LoginUIController implements Initializable,UIIF {
             System.out.println(e.getMessage());
         }
         
+        if(mainApp.getUser() != null)
+                    mainApp.showManiMenuUI();
         
     }
     
@@ -144,20 +159,41 @@ public class LoginUIController implements Initializable,UIIF {
     }
     
     
-    public void receiveUserData(User u) {
-        if(u != null)
-        {
-            this.user = u;
-        }
+    public  void  receiveUserData(User u) {
+        
+            mainApp.setUser(u);
+            //notifyAll();
     }
 
     public void invalidLogin(InvalidAccountException e) {
-        System.out.println("Login Invalid");
+       System.out.println("Login Invalid");
+        /*final Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.initOwner(mainApp.getStage());
+                VBox dialogVbox = new VBox(20);
+                dialogVbox.getChildren().add(new Text("Invalid Account"));
+                Scene dialogScene = new Scene(dialogVbox, 300, 200);
+                dialog.setScene(dialogScene);
+                dialog.show();    */
     }
 
     public void connectionException(Exception e) {
+        /* final Stage dialog = new Stage();
+                dialog.initModality(Modality.APPLICATION_MODAL);
+                dialog.initOwner(mainApp.getStage());
+                VBox dialogVbox = new VBox(20);
+                dialogVbox.getChildren().add(new Text("server Error !!!!!!!!!"));
+                Scene dialogScene = new Scene(dialogVbox, 300, 200);
+                dialog.setScene(dialogScene);
+                dialog.show();    
+                mainApp.showLoginUI();*/
         System.out.println("Error Connection");
-        System.out.println(e.getMessage());
+        //System.out.println(e.getMessage());
+    }
+    
+    public void closeButton()
+    {
+        System.exit(0);
     }
 
     

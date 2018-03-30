@@ -5,11 +5,10 @@
         <group>
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/RPJavaMainApp.java</file>
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/MainMenuUIController.java</file>
+            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/RPJClient.java</file>
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/LoginUIController.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/DerbyJavaDb/DbConnection.java</file>
+            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/common/wrappers/AccountQuery.java</file>
             <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/SignUpUIController.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/client/UI/RecoveryPasswordUIController.java</file>
-            <file>file:/F:/documents/4IG/S2/Projet_Genie_log/RPJava/src/rpjava/server/RPJServer.java</file>
         </group>
     </open-files>
 </project-private>

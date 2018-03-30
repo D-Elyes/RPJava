@@ -11,13 +11,25 @@ import rpjava.server.dao.*;
 import java.util.*;
 
 /**
- *
- * @author Florent BERLAND
+ * This class regroups all the access to Non-Playable Characters data persistence.
+ * @author RPJavaTeam
  */
 public class NpcDaoDerby implements NpcDAO {
 
+    /**
+     * Property that will contain the connection to the Database.
+     * Will be constructed with a fellow method.
+     * 
+     * @see DbConnection#DbConnection()
+     */ 
     private Connection con = DbConnection.getInstance();
     
+    /**
+     * This method allows you to get all the NPCs linked to a User.
+     * @param userID The User identifier
+     * @return NPC[] A vector of NPCs objects
+     * @throws SQLException If an error occured, connection to the database failed
+     */ 
     @Override
     public NPC[] getNpcs(int userID) throws SQLException {
         
@@ -35,7 +47,13 @@ public class NpcDaoDerby implements NpcDAO {
         
         return (NPC[])col.toArray();
     }
-
+    /**
+     * This method allows an User to create a new NPC.
+     * @param userID The User identifier
+     * @param npc The new NPC to add
+     * @return Boolean True if the new NPC is added to the User list, else False
+     * @throws SQLException If an error occured, connection to the database failed
+     */ 
     @Override
     public boolean addNpc(int userID, NPC npc) throws SQLException {
         
@@ -52,6 +70,14 @@ public class NpcDaoDerby implements NpcDAO {
         return con.createStatement().execute(req);
     }
 
+        /**
+     * This method allows an User to update a new NPC.
+     * @param userID The User identifier
+     * @param oldValue The current NPC before changes
+     * @param newValue The new values of the NPC
+     * @return Boolean True if the new NPC is changed, else False
+     * @throws SQLException If an error occured, connection to the database failed
+     */ 
     @Override
     public boolean updateNpc(int userID, NPC oldValue, NPC newValue) throws SQLException {
         String req = "UPDATE GENERICNPC SET "
@@ -71,7 +97,13 @@ public class NpcDaoDerby implements NpcDAO {
         
         return con.createStatement().execute(req);
     }
-
+   /**
+     * This method allows an User to delete one of his NPC.
+     * @param userID The User identifier
+     * @param npc The NPC to delete
+     * @return Boolean True if the new NPC is correctly deleteded, else False
+     * @throws SQLException If an error occured, connection to the database failed
+     */ 
     @Override
     public boolean deleteNpc(int userID, NPC npc) throws SQLException {
         

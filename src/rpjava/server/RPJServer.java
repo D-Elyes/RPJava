@@ -5,6 +5,7 @@
  */
 package rpjava.server;
 
+import DerbyJavaDb.FactoryDaoDerby;
 import rpjava.server.dao.*;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,11 +24,13 @@ public class RPJServer extends AbstractServer {
 
     AccountDAO accountDAO;
     NpcDAO npcDAO;
+    MapDAO mapDAO;
     
     public RPJServer(int port, AbstractFactoryDao daoGenerator) {
         super(port);
         this.accountDAO = daoGenerator.createAccountDao();
         this.npcDAO = daoGenerator.createNpcDao();
+        this.mapDAO = daoGenerator.createMapDao();
     }
 
     @Override
@@ -76,11 +79,14 @@ public class RPJServer extends AbstractServer {
                 try{
                     Object[] data = (Object[])query.getData();
                     if (accountDAO.signUp((Account)data[0], (User)data[1])){
-                        client.sendToClient((User)data[1]);
+                        client.sendToClient(accountDAO.signIn((Account)data[0]));
                     } else {
                         client.sendToClient(new InvalidAccountException("Cannot create an account with this name"));
                     }
-                } catch (Exception e){}
+                } catch (Exception e)
+                {
+                    System.out.println(e.getMessage());
+                }
                 break;
             }
             case UPDATE: {
