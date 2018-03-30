@@ -6,11 +6,17 @@
 package rpjava.client;
 
 /**
- *
- * @author Florent BERLAND
+ *  This class os the super class of user interface.
+ * @author RPJavaTeam
+ * @version 1.0
  */
 public interface UIIF {
     
+    /**
+    * This method shows to the current UIIF how to treat a receiving message. Right now, because UIIF is an interf  ce, this method is empty.
+    * @param msg The message received by the UIIF
+    */ 
+
     public void handleMessage(Object msg);
     
 }

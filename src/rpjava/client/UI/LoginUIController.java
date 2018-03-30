@@ -21,31 +21,53 @@ import rpjava.common.exception.InvalidAccountException;
 import rpjava.common.wrappers.AccountQuery;
 
 /**
- * FXML Controller class
- *
- * @author doude
+ * This class is the controller that manages The Login interface
+ * @author RPJavaTeam
+ * @version 1.0
  */
 public class LoginUIController implements Initializable,UIIF {
+
     
-    @FXML
+// INSTANCE PROPERTIES ---------------------------------------------------------
+    
+    /**
+    * Property FXML that contains the login textfield
+    */
     private TextField loginTextField;
     
-    @FXML
+    /**
+    * Property FXML that contains the password textfield
+    */
     private TextField passwordTextField;
     
     
-    @FXML
+    /**
+    * Property FXML that contains the signup label
+    */
     private Label SignUpLabel;
     
-    @FXML
+    /**
+    * Property FXML that contains the forget password textfield
+    */
     private Label forgetPassLabel;
     
-    //Reference to the main app
+    /**
+    * Property that contains the reference to the main application
+    */
     private RPJavaMainApp mainApp;
     
+    /**
+    * Property that contains the reference to the linked client
+    */
     private RPJClient client;
+
+// CONSTRUCTOR -----------------------------------------------------------------
     
-    //The constructor
+    /**
+    * This method constructs a LoginUIController instance
+    * @param host The host which will hold the connection
+    * @param port The port the connection has to listen
+    */
     public LoginUIController(String host, int port)
     {
        
@@ -79,7 +101,9 @@ public class LoginUIController implements Initializable,UIIF {
     
 
     /**
-     * Initializes the controller class.
+     * This method initializes the controller class. To complete
+     * @param url 
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -88,7 +112,7 @@ public class LoginUIController implements Initializable,UIIF {
 
     
     /**
-     * Is called by the main application  to give  a reference back to itself
+     * This method is called by the main application to give a reference back to itself
      * @param mainApp 
      */
     public void setRPJavaMainApp(RPJavaMainApp mainApp)
@@ -99,7 +123,7 @@ public class LoginUIController implements Initializable,UIIF {
     }
     
     /**
-     * Called when the user click on the Sing in button
+     * This method is called when the user clicks on the sign in button
      */
     
     @FXML
@@ -125,18 +149,34 @@ public class LoginUIController implements Initializable,UIIF {
         
     }
     
+    /**
+    * This method displays the nickname of the connecting user.
+    * @param u The connecting user
+    */
     public void receiveUserData(User u) {
         System.out.println(u.getNickName());
     }
 
+     /**
+    * This method displays an error message when the login is invalid.
+    * @param e An invalid account error
+    */
     public void invalidLogin(InvalidAccountException e) {
-        System.out.println("Login Invalid");
+        System.out.println("Invalid Login");
     }
 
+     /**
+    * This method displays an error message when an exception occurs.
+    * @param e An exception
+    */
     public void connectionException(Exception e) {
         System.out.println(e.getMessage());
     }
     
+     /**
+    * This method tells to the current class how to treat a receiving message.
+    * @param msg The receiving message
+    */
     @Override
     public void handleMessage(Object msg) {
         if(msg instanceof InvalidAccountException){

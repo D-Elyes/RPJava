@@ -6,11 +6,18 @@
 package rpjava.common;
 
 /**
- *
- * @author Florent BERLAND
+ * This class gathers all informations about equipable items
+ * @author RPJavaTeam
  */
 public abstract class Equipable extends Item {
+
+// CONSTRUCTOR -----------------------------------------------------------------
     
+   /**
+    * This method creates an equipable item
+    * @param name The name of the item
+    * @param description The text that describes the item
+    */
     public Equipable(String name, String description) {
         super(name, description);
     }
