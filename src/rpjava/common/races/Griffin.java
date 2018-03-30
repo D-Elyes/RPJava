@@ -5,6 +5,7 @@
  */
 package rpjava.common.races;
 
+import javafx.beans.property.StringProperty;
 import rpjava.common.Race;
 
 /**

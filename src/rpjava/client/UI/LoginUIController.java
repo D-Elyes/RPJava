@@ -95,21 +95,7 @@ public class LoginUIController implements Initializable,UIIF {
         
     }
     
-    /*public void initConnectioToServer(String host, int port)
-    {
-        
-         try
-        {
-            client = new RPJClient(host, port, this);
-             client.openConnection();
-        }
-        catch(IOException e)
-        {
-               System.out.println(e.getMessage());
-        }
-    }*/
-    
-    
+  
 
     /**
      * This method initializes the controller class. To complete
@@ -143,10 +129,10 @@ public class LoginUIController implements Initializable,UIIF {
     @FXML
     private void handleSingIn()
     {
-        System.out.println("****************************");
+       
         Account acc = new Account(loginTextField.getText(), passwordTextField.getText());
         AccountQuery accQuery = new AccountQuery(acc, AccountQuery.QueryType.SIGNIN);
-        System.out.println("****************************");
+       
          try
         { 
             

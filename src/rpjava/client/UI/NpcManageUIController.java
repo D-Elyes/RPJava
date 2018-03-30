@@ -8,6 +8,8 @@ package rpjava.client.UI;
 import java.net.URL;
 import java.util.Collection;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -54,10 +56,8 @@ public class NpcManageUIController implements Initializable {
    private RPJavaMainApp mainApp;
    private RPJClient client;
    
-   @FXML
     private ObservableList<Race> raceData = FXCollections.observableArrayList();
    
-   @FXML
     private ObservableList<NPC> npcData = FXCollections.observableArrayList();
    
    @FXML
@@ -72,6 +72,8 @@ public class NpcManageUIController implements Initializable {
         {
             raceData.add(i);
         }
+        
+        
     }
     /**
      * Initializes the controller class.
@@ -79,7 +81,8 @@ public class NpcManageUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        //raceName.setCellValueFactory(cellData -> cellData.getValue().getRoleName());
+        raceListTableView.setItems(raceData);
+        raceName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRaceName()));
     }    
     
     
@@ -90,5 +93,10 @@ public class NpcManageUIController implements Initializable {
         this.mainApp = mainApp;
         
     }
+      
+      public ObservableList<Race> getPersonData() {
+        return raceData;
+    }
+
     
 }

@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -45,6 +46,7 @@ public class RPJavaMainApp extends Application {
     * Property that will contains the primary stage of the main application 
     */
     private Stage primaryStage;
+    
     
 
 // INSTANCE METHODS ------------------------------------------------------------
@@ -211,9 +213,10 @@ public class RPJavaMainApp extends Application {
             
             loader.setLocation(RPJavaMainApp.class.getResource("NpcManageUI.fxml"));
             loader.setController(controller);
-            AnchorPane npcUI = (AnchorPane) loader.load();
             
-           controller.setRPJavaMainApp(this);
+            BorderPane npcUI = (BorderPane) loader.load();
+             controller.setRPJavaMainApp(this);
+          
             
             Scene npcScene = new Scene(npcUI);
             primaryStage.setScene(npcScene);
