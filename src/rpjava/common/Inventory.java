@@ -13,20 +13,16 @@ import java.util.*;
  */
 public class Inventory {
 
-// INSTANCE PROPOERTIES --------------------------------------------------------
+// INSTANCE PROPERTIES --------------------------------------------------------
     
-<<<<<<< Updated upstream
-    private java.util.Map<Item,Integer> items;
-=======
     /**
     * Property that will contain a vector in which each item the character owes is linked to the number of items there are in the inventory
     */
-    private Map<Item,Integer> items;
-    
+    private java.util.Map<Item,Integer> items;
+
     /**
     * Property that shows the size of the inventory
     */
->>>>>>> Stashed changes
     private int size;
     
 // CONSTRUCTOR -----------------------------------------------------------------
